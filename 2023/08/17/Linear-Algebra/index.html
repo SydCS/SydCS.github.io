@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="矩阵即线性变换。  线性方程组 Ax&#x3D;b 对任意向量b：  有唯一解：矩阵 A 可逆 (invertible)，x &#x3D; A^-1^b 无解：   矩阵 A &#x3D; ($\vec{u}$, $\vec{v}$, $\vec{w}$) 若 A 可逆，则   $\vec{u}$, $\vec{v}$, $\vec{w}$ 的全部线性组合是整个3维空间。 向量 $\vec{u}$, $\v">
+    <meta name="description" content="矩阵表示线性映射。  线性方程组 Ax&#x3D;b 对任意向量 $\vec{b}$：  有唯一解：矩阵 A 可逆 (invertible)，x &#x3D; A^-1^b 无解：   矩阵 A &#x3D; ($\vec{u}$, $\vec{v}$, $\vec{w}$) 若 A 可逆，则   $\vec{u}$, $\vec{v}$, $\vec{w}$ 的全部线性组合是整个3维空间。 向量 $\ve">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linear Algebra">
 <meta property="og:url" content="https://sydcs.github.io/2023/08/17/Linear-Algebra/index.html">
 <meta property="og:site_name" content="Ye&#39;s Blog">
-<meta property="og:description" content="矩阵即线性变换。  线性方程组 Ax&#x3D;b 对任意向量b：  有唯一解：矩阵 A 可逆 (invertible)，x &#x3D; A^-1^b 无解：   矩阵 A &#x3D; ($\vec{u}$, $\vec{v}$, $\vec{w}$) 若 A 可逆，则   $\vec{u}$, $\vec{v}$, $\vec{w}$ 的全部线性组合是整个3维空间。 向量 $\vec{u}$, $\v">
+<meta property="og:description" content="矩阵表示线性映射。  线性方程组 Ax&#x3D;b 对任意向量 $\vec{b}$：  有唯一解：矩阵 A 可逆 (invertible)，x &#x3D; A^-1^b 无解：   矩阵 A &#x3D; ($\vec{u}$, $\vec{v}$, $\vec{w}$) 若 A 可逆，则   $\vec{u}$, $\vec{v}$, $\vec{w}$ 的全部线性组合是整个3维空间。 向量 $\ve">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-08-16T16:30:01.000Z">
-<meta property="article:modified_time" content="2023-08-16T17:09:35.472Z">
+<meta property="article:modified_time" content="2023-09-05T15:47:54.636Z">
 <meta property="article:author" content="Ye">
 <meta name="twitter:card" content="summary">
     
@@ -80,6 +80,8 @@
     <br/>
     <span id="actions">
       <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2023/12/18/Bomb-Lab/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
         <li><a class="icon" aria-label="Next post" href="/2023/08/14/screen/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
@@ -148,9 +150,9 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <p>矩阵即线性变换。</p>
+    <p>矩阵表示线性映射。</p>
 <hr>
-<p>线性方程组 <code>Ax=b</code> 对任意向量b：</p>
+<p>线性方程组 <code>Ax=b</code> 对任意向量 $\vec{b}$：</p>
 <ul>
 <li>有唯一解：矩阵 A 可逆 (invertible)，x &#x3D; A^-1^b</li>
 <li>无解：</li>
@@ -164,11 +166,10 @@
 </ul>
 <p>否则，$\vec{0}$ 可以写成 $\vec{u}$, $\vec{v}$, $\vec{w}$ 的多种线性组合。称矩阵 A 奇异 (singular)，向量 $ \vec{u}$, $\vec{v}$, $\vec{w}$ 线性相关。</p>
 <br/>
-总结：<br/>  
-若方阵 A 的列向量**线性无关**，则 A 可逆，Ax = 0 只有零解<br/>  
-若方阵 A 的列向量线性相关，则 A 奇异，Ax = 0 有无穷多解。
+总结：
 
-
+<p>若方阵 A 的列向量<strong>线性无关</strong>，则 A 可逆，Ax &#x3D; 0 只有零解；<br>若方阵 A 的列向量线性相关，则 A 奇异，Ax &#x3D; 0 有无穷多解。</p>
+<hr>
 
   </div>
 </article>
