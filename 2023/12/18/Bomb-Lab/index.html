@@ -1,11 +1,21 @@
+
+
 <!DOCTYPE html>
-<html lang=en>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
 <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Ye">
+  <meta name="keywords" content="">
+  
     <meta name="description" content="gdb 基本使用disassemble … break … nextistepi continue x &#x2F;FMT ADDRESSprint EXP run ARGS 1 字符串比较layout asm disassemble phase_1 调 strings_not_equal要求返回0 - equal x &#x2F;s 0x4024c0“I am not part of the p">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Bomb Lab">
@@ -13,162 +23,274 @@
 <meta property="og:site_name" content="Ye&#39;s Blog">
 <meta property="og:description" content="gdb 基本使用disassemble … break … nextistepi continue x &#x2F;FMT ADDRESSprint EXP run ARGS 1 字符串比较layout asm disassemble phase_1 调 strings_not_equal要求返回0 - equal x &#x2F;s 0x4024c0“I am not part of the p">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://sydcs.github.io/.io//12/18/Bomb-Lab/1.png">
-<meta property="og:image" content="https://sydcs.github.io/.io//12/18/Bomb-Lab/Tree.png">
+<meta property="og:image" content="https://sydcs.github.io/images/1.png">
+<meta property="og:image" content="https://sydcs.github.io/images/Tree.png">
 <meta property="article:published_time" content="2023-12-18T09:43:10.000Z">
-<meta property="article:modified_time" content="2023-12-18T09:45:53.905Z">
+<meta property="article:modified_time" content="2023-12-18T11:37:38.780Z">
 <meta property="article:author" content="Ye">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://sydcs.github.io/.io//12/18/Bomb-Lab/1.png">
-    
-    
-      
-        
-          <link rel="shortcut icon" href="/images/favicon.ico">
-        
-      
-      
-        
-          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-        
-      
-    
-    <!-- title -->
-    <title>Bomb Lab</title>
-    <!-- async scripts -->
-    <!-- Google Analytics -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sydcs.github.io/images/1.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Bomb Lab - Ye&#39;s Blog</title>
 
-
-    <!-- Umami Analytics -->
-
-
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
-
-    <!-- persian styles -->
-    
-    <!-- rss -->
-    
-    
-	<!-- mathjax -->
-	
-<meta name="generator" content="Hexo 6.3.0"></head>
-
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-        <!--
-       --><li><a href="/">Home</a></li><!--
-     --><!--
-       --><li><a href="/about/">About</a></li><!--
-     --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="https://github.com/SydCS">Projects</a></li><!--
-     -->
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        
-        <li><a class="icon" aria-label="Next post" href="/2023/08/17/Linear-Algebra/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sydcs.github.io/2023/12/18/Bomb-Lab/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sydcs.github.io/2023/12/18/Bomb-Lab/&text=Bomb Lab"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sydcs.github.io/2023/12/18/Bomb-Lab/&title=Bomb Lab"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sydcs.github.io/2023/12/18/Bomb-Lab/&is_video=false&description=Bomb Lab"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Bomb Lab&body=Check out this article: https://sydcs.github.io/2023/12/18/Bomb-Lab/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sydcs.github.io/2023/12/18/Bomb-Lab/&title=Bomb Lab"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sydcs.github.io/2023/12/18/Bomb-Lab/&title=Bomb Lab"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sydcs.github.io/2023/12/18/Bomb-Lab/&title=Bomb Lab"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sydcs.github.io/2023/12/18/Bomb-Lab/&title=Bomb Lab"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sydcs.github.io/2023/12/18/Bomb-Lab/&name=Bomb Lab&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sydcs.github.io/2023/12/18/Bomb-Lab/&t=Bomb Lab"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    
-    
-      <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#gdb-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">gdb 基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%AF%94%E8%BE%83"><span class="toc-number">2.</span> <span class="toc-text">1 字符串比较</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%BE%AA%E7%8E%AF"><span class="toc-number">3.</span> <span class="toc-text">2 循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%9D%A1%E4%BB%B6-%E5%88%86%E6%94%AF"><span class="toc-number">4.</span> <span class="toc-text">3 条件&#x2F;分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E9%80%92%E5%BD%92%E8%B0%83%E7%94%A8%E5%92%8C%E6%A0%88"><span class="toc-number">5.</span> <span class="toc-text">4 递归调用和栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%8C%87%E9%92%88"><span class="toc-number">6.</span> <span class="toc-text">5 指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E9%93%BE%E8%A1%A8-%E6%8C%87%E9%92%88-%E7%BB%93%E6%9E%84"><span class="toc-number">7.</span> <span class="toc-text">6 链表&#x2F;指针&#x2F;结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#secret-phase"><span class="toc-number">8.</span> <span class="toc-text">secret phase</span></a></li></ol>
-      </div>
-    
-  </span>
-</div>
-
-    
-    <div class="content index py4 ">
-        
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle p-name" itemprop="name headline">
-        Bomb Lab
-    </h1>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
 
-    <div class="meta">
-      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span class="p-name" itemprop="name">Ye</span>
-      </span>
-      
-    <div class="postdate">
-      
-        <time datetime="2023-12-18T09:43:10.000Z" class="dt-published" itemprop="datePublished">2023-12-18</time>
-        
-      
-    </div>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
-      
 
-      
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
 
-    </div>
-  </header>
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
-  <div class="content e-content" itemprop="articleBody">
-    <h3 id="gdb-基本使用"><a href="#gdb-基本使用" class="headerlink" title="gdb 基本使用"></a>gdb 基本使用</h3><p>disassemble …</p>
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"sydcs.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Bomb Lab"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-12-18 17:43" pubdate>
+          December 18, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          707 words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          6 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Bomb Lab</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="gdb-基本使用"><a href="#gdb-基本使用" class="headerlink" title="gdb 基本使用"></a>gdb 基本使用</h1><p>disassemble …</p>
 <p>break …</p>
 <p>nexti<br>stepi</p>
 <p>continue</p>
 <p>x &#x2F;FMT ADDRESS<br>print EXP</p>
 <p>run ARGS</p>
-<h3 id="1-字符串比较"><a href="#1-字符串比较" class="headerlink" title="1 字符串比较"></a>1 字符串比较</h3><p>layout asm</p>
+<h1 id="1-字符串比较"><a href="#1-字符串比较" class="headerlink" title="1 字符串比较"></a>1 字符串比较</h1><p>layout asm</p>
 <p>disassemble phase_1</p>
 <p>调 strings_not_equal<br>要求返回0 - equal</p>
 <p>x &#x2F;s 0x4024c0<br>“I am not part of the problem. I am a Republican.”<br>写入 ans.txt</p>
 <p>break phase_1<br>run ans.txt<br>nexti<br>print $eax</p>
-<h3 id="2-循环"><a href="#2-循环" class="headerlink" title="2 循环"></a>2 循环</h3><p>disas phase_2</p>
+<h1 id="2-循环"><a href="#2-循环" class="headerlink" title="2 循环"></a>2 循环</h1><p>disas phase_2</p>
 <p>调 read_six_numbers：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov    $<span class="number">0x4027b5</span>,%esi     </span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">mov    $<span class="hljs-number">0x4027b5</span>,%esi     <br></code></pre></td></tr></table></figure>
 <p>x &#x2F;s 0x4027b5<br>“%d %d %d %d %d %d”</p>
 <p>调 sscanf：</p>
 <table>
@@ -196,7 +318,7 @@
 </tr>
 </tbody></table>
 <p>循环：第一个数为1，后面依次翻倍<br>1 2 4 8 16 32</p>
-<h3 id="3-条件-分支"><a href="#3-条件-分支" class="headerlink" title="3 条件&#x2F;分支"></a>3 条件&#x2F;分支</h3><p>disas phase_3</p>
+<h1 id="3-条件-分支"><a href="#3-条件-分支" class="headerlink" title="3 条件&#x2F;分支"></a>3 条件&#x2F;分支</h1><p>disas phase_3</p>
 <p>调 sscanf：</p>
 <table>
 <thead>
@@ -215,12 +337,12 @@
 </tr>
 </tbody></table>
 <p>x &#x2F;s 0x4027c1<br>“%d %d”</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmpl   $<span class="number">0x7</span>,<span class="number">0xc</span>(%rsp)</span><br><span class="line">ja</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c">cmpl   $<span class="hljs-number">0x7</span>,<span class="hljs-number">0xc</span>(%rsp)<br>ja<br></code></pre></td></tr></table></figure>
 <p>第一个数 &lt;&#x3D; 7</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jmpq   *<span class="number">0x402520</span>(,%rax,<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">jmpq   *<span class="hljs-number">0x402520</span>(,%rax,<span class="hljs-number">8</span>)<br></code></pre></td></tr></table></figure>
 <p>不妨令第一个数 &#x3D; 1<br>x &#x2F;x 0x402528<br>0x00400fc9</p>
 <p>第二个数 0x52</p>
-<h3 id="4-递归调用和栈"><a href="#4-递归调用和栈" class="headerlink" title="4 递归调用和栈"></a>4 递归调用和栈</h3><p>disas phase_4</p>
+<h1 id="4-递归调用和栈"><a href="#4-递归调用和栈" class="headerlink" title="4 递归调用和栈"></a>4 递归调用和栈</h1><p>disas phase_4</p>
 <p>同3，调 sscanf：</p>
 <table>
 <thead>
@@ -239,7 +361,7 @@
 </tr>
 </tbody></table>
 <p>x &#x2F;s 0x4027c1<br>“%d %d”</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmpl   $<span class="number">0xe</span>,<span class="number">0xc</span>(%rsp)</span><br><span class="line">jbe</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c">cmpl   $<span class="hljs-number">0xe</span>,<span class="hljs-number">0xc</span>(%rsp)<br>jbe<br></code></pre></td></tr></table></figure>
 <p>第一个数 &lt;&#x3D; 14</p>
 <p>调 func4：</p>
 <table>
@@ -258,38 +380,38 @@
 </tbody></table>
 <p>disas func4</p>
 <p>递归调用</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmp    $<span class="number">0xf</span>,%eax </span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">cmp    $<span class="hljs-number">0xf</span>,%eax <br></code></pre></td></tr></table></figure>
 <p>要求返回值为f<br>第一个数 &#x3D; 5</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmpl   $<span class="number">0xf</span>,<span class="number">0x8</span>(%rsp)   </span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">cmpl   $<span class="hljs-number">0xf</span>,<span class="hljs-number">0x8</span>(%rsp)   <br></code></pre></td></tr></table></figure>
 <p>第二个数 &#x3D; f</p>
-<h3 id="5-指针"><a href="#5-指针" class="headerlink" title="5 指针"></a>5 指针</h3><p>disas phase_5</p>
+<h1 id="5-指针"><a href="#5-指针" class="headerlink" title="5 指针"></a>5 指针</h1><p>disas phase_5</p>
 <p>调 string_length</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmp    $<span class="number">0x6</span>,%eax </span><br><span class="line">je</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c">cmp    $<span class="hljs-number">0x6</span>,%eax <br>je<br></code></pre></td></tr></table></figure>
 <p>要求字符串长度为6</p>
 <p>进入循环：<br>循环6次，结果 %edx&#x3D;0x37</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">movzbl (%rbx,%rax,<span class="number">1</span>),%ecx </span><br><span class="line">and    $<span class="number">0xf</span>,%ecx</span><br><span class="line">add    <span class="number">0x402560</span>(,%rcx,<span class="number">4</span>),%edx  </span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c">movzbl (%rbx,%rax,<span class="hljs-number">1</span>),%ecx <br>and    $<span class="hljs-number">0xf</span>,%ecx<br>add    <span class="hljs-number">0x402560</span>(,%rcx,<span class="hljs-number">4</span>),%edx  <br></code></pre></td></tr></table></figure>
 <p>x &#x2F;6x 0x402560<br>2 a 6 1 c 10</p>
 <p>16+12+10+10+6+1&#x3D;55<br>ASCII 码末四位作为索引 5 4 1 1 2 3<br>edaabc</p>
-<h3 id="6-链表-指针-结构"><a href="#6-链表-指针-结构" class="headerlink" title="6 链表&#x2F;指针&#x2F;结构"></a>6 链表&#x2F;指针&#x2F;结构</h3><p>disas phase_6</p>
+<h1 id="6-链表-指针-结构"><a href="#6-链表-指针-结构" class="headerlink" title="6 链表&#x2F;指针&#x2F;结构"></a>6 链表&#x2F;指针&#x2F;结构</h1><p>disas phase_6</p>
 <p>调 read_six_numbers<br>放到从 %rsp+0x30 开始处</p>
 <p>大循环1：<br>六个数都不同，并且均 &lt;&#x3D; 6</p>
 <p>循环2：<br>x &#x2F;24 0x6042f0</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">0x6042f0 &lt;node1&gt;:       0x00000271      0x00000001      0x00604300      0x00000000</span><br><span class="line">0x604300 &lt;node2&gt;:       0x000002f2      0x00000002      0x00604310      0x00000000</span><br><span class="line">0x604310 &lt;node3&gt;:       0x00000111      0x00000003      0x00604320      0x00000000</span><br><span class="line">0x604320 &lt;node4&gt;:       0x00000231      0x00000004      0x00604330      0x00000000</span><br><span class="line">0x604330 &lt;node5&gt;:       0x0000016e      0x00000005      0x00604340      0x00000000</span><br><span class="line">0x604340 &lt;node6&gt;:       0x0000022f      0x00000006      0x00000000      0x00000000</span><br><span class="line"></span><br><span class="line">0x6042f0 &lt;node1&gt;:       625     1       6308608 0</span><br><span class="line">0x604300 &lt;node2&gt;:       754     2       6308624 0</span><br><span class="line">0x604310 &lt;node3&gt;:       273     3       6308640 0</span><br><span class="line">0x604320 &lt;node4&gt;:       561     4       6308656 0</span><br><span class="line">0x604330 &lt;node5&gt;:       366     5       6308672 0</span><br><span class="line">0x604340 &lt;node6&gt;:       559     6       0       0</span><br></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">0x6042f0</span> &lt;node1&gt;:       <span class="hljs-number">0</span>x00000271      <span class="hljs-number">0</span>x00000001      <span class="hljs-number">0</span>x00604300      <span class="hljs-number">0</span>x00000000<br><span class="hljs-attribute">0x604300</span> &lt;node2&gt;:       <span class="hljs-number">0</span>x000002f2      <span class="hljs-number">0</span>x00000002      <span class="hljs-number">0</span>x00604310      <span class="hljs-number">0</span>x00000000<br><span class="hljs-attribute">0x604310</span> &lt;node3&gt;:       <span class="hljs-number">0</span>x00000111      <span class="hljs-number">0</span>x00000003      <span class="hljs-number">0</span>x00604320      <span class="hljs-number">0</span>x00000000<br><span class="hljs-attribute">0x604320</span> &lt;node4&gt;:       <span class="hljs-number">0</span>x00000231      <span class="hljs-number">0</span>x00000004      <span class="hljs-number">0</span>x00604330      <span class="hljs-number">0</span>x00000000<br><span class="hljs-attribute">0x604330</span> &lt;node5&gt;:       <span class="hljs-number">0</span>x0000016e      <span class="hljs-number">0</span>x00000005      <span class="hljs-number">0</span>x00604340      <span class="hljs-number">0</span>x00000000<br><span class="hljs-attribute">0x604340</span> &lt;node6&gt;:       <span class="hljs-number">0</span>x0000022f      <span class="hljs-number">0</span>x00000006      <span class="hljs-number">0</span>x00000000      <span class="hljs-number">0</span>x00000000<br><br><span class="hljs-attribute">0x6042f0</span> &lt;node1&gt;:       <span class="hljs-number">625</span>     <span class="hljs-number">1</span>       <span class="hljs-number">6308608</span> <span class="hljs-number">0</span><br><span class="hljs-attribute">0x604300</span> &lt;node2&gt;:       <span class="hljs-number">754</span>     <span class="hljs-number">2</span>       <span class="hljs-number">6308624</span> <span class="hljs-number">0</span><br><span class="hljs-attribute">0x604310</span> &lt;node3&gt;:       <span class="hljs-number">273</span>     <span class="hljs-number">3</span>       <span class="hljs-number">6308640</span> <span class="hljs-number">0</span><br><span class="hljs-attribute">0x604320</span> &lt;node4&gt;:       <span class="hljs-number">561</span>     <span class="hljs-number">4</span>       <span class="hljs-number">6308656</span> <span class="hljs-number">0</span><br><span class="hljs-attribute">0x604330</span> &lt;node5&gt;:       <span class="hljs-number">366</span>     <span class="hljs-number">5</span>       <span class="hljs-number">6308672</span> <span class="hljs-number">0</span><br><span class="hljs-attribute">0x604340</span> &lt;node6&gt;:       <span class="hljs-number">559</span>     <span class="hljs-number">6</span>       <span class="hljs-number">0</span>       <span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
 
 <p>struct 链表：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="type">int</span> val;</span><br><span class="line">    <span class="type">int</span> ordinal;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">next</span>;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>&#123;</span><br>    <span class="hljs-type">int</span> val;<br>    <span class="hljs-type">int</span> ordinal;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">next</span>;</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>struct 链表中6个 struct 的地址，按照输入数字的顺序，顺着放到 %rsp +</p>
 <p>循环3：<br>x &#x2F;12 0x7fffffffe660<br>0x7fffffffe660: 6308608 0       6308592 0<br>0x7fffffffe670: 6308640 0       6308672 0<br>0x7fffffffe680: 6308656 0       6308624 0</p>
 <p>重排链表</p>
 <p>循环4：<br>x &#x2F;24x 0x6042f0</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">0x6042f0 &lt;node1&gt;:       0x00000271      0x00000001      0x00604320      0x00000000</span><br><span class="line">0x604300 &lt;node2&gt;:       0x000002f2      0x00000002      0x006042f0      0x00000000</span><br><span class="line">0x604310 &lt;node3&gt;:       0x00000111      0x00000003      0x00000000      0x00000000</span><br><span class="line">0x604320 &lt;node4&gt;:       0x00000231      0x00000004      0x00604340      0x00000000</span><br><span class="line">0x604330 &lt;node5&gt;:       0x0000016e      0x00000005      0x00604310      0x00000000</span><br><span class="line">0x604340 &lt;node6&gt;:       0x0000022f      0x00000006      0x00604330      0x00000000</span><br></pre></td></tr></table></figure>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs dns"><span class="hljs-number">0x6042f0</span> &lt;node1&gt;:       <span class="hljs-number">0x00000271</span>      <span class="hljs-number">0x00000001</span>      <span class="hljs-number">0x00604320</span>      <span class="hljs-number">0x00000000</span><br><span class="hljs-number">0x604300</span> &lt;node2&gt;:       <span class="hljs-number">0</span>x<span class="hljs-number">000002f2</span>      <span class="hljs-number">0x00000002</span>      <span class="hljs-number">0</span>x<span class="hljs-number">006042f0</span>      <span class="hljs-number">0x00000000</span><br><span class="hljs-number">0x604310</span> &lt;node3&gt;:       <span class="hljs-number">0x00000111</span>      <span class="hljs-number">0x00000003</span>      <span class="hljs-number">0x00000000</span>      <span class="hljs-number">0x00000000</span><br><span class="hljs-number">0x604320</span> &lt;node4&gt;:       <span class="hljs-number">0x00000231</span>      <span class="hljs-number">0x00000004</span>      <span class="hljs-number">0x00604340</span>      <span class="hljs-number">0x00000000</span><br><span class="hljs-number">0x604330</span> &lt;node5&gt;:       <span class="hljs-number">0</span>x0000016e      <span class="hljs-number">0x00000005</span>      <span class="hljs-number">0x00604310</span>      <span class="hljs-number">0x00000000</span><br><span class="hljs-number">0x604340</span> &lt;node6&gt;:       <span class="hljs-number">0</span>x0000022f      <span class="hljs-number">0x00000006</span>      <span class="hljs-number">0x00604330</span>      <span class="hljs-number">0x00000000</span><br></code></pre></td></tr></table></figure>
 
 <p>验证每个 struct 的 val &gt;&#x3D; 链表中下一项的 val<br>val 从大到小：2 1 4 6 5 3</p>
-<h3 id="secret-phase"><a href="#secret-phase" class="headerlink" title="secret phase"></a>secret phase</h3><p>在 phase_defused 中调了 secret_phase：<br>b *0x401772</p>
+<h1 id="secret-phase"><a href="#secret-phase" class="headerlink" title="secret phase"></a>secret phase</h1><p>在 phase_defused 中调了 secret_phase：<br>b *0x401772</p>
 <p>(gdb) x &#x2F;s 0x402660<br>0x402660:       “Curses, you’ve found the secret phase!”<br>(gdb) x &#x2F;s 0x402688<br>0x402688:       “But finding it and solving it are quite different…”<br>找对了位置</p>
 <p>先调 sscanf：<br>(gdb) x &#x2F;s 0x40280b<br>0x40280b:       “%d %d %s”<br>三个输入</p>
-<p>phase_3 or phase_4? 与 phase_4 读取的 %rdi 地址相同<br>(gdb) x &#x2F;s 0x6048b0<br>0x6048b0 &lt;input_strings+240&gt;:   “5 15 DrEvil”<br><img src="/.io//12/18/Bomb-Lab/1.png"></p>
+<p>phase_3 or phase_4? 与 phase_4 读取的 %rdi 地址相同<br>(gdb) x &#x2F;s 0x6048b0<br>0x6048b0 &lt;input_strings+240&gt;:   “5 15 DrEvil”<br><img src="/images/1.png" srcset="/img/loading.gif" lazyload></p>
 <p>(gdb) x &#x2F;s 0x402814<br>0x402814:       “DrEvil”<br>取第三个输入判等</p>
 <p>综上，在 phase_4 的输入之后再补一个 DrEvil</p>
 <hr>
@@ -311,151 +433,422 @@
 <p>要求返回值为5</p>
 <p>fun7：<br>递归调用，比较 num 与 (%rdi)+</p>
 <p>x &#x2F;100xg 0x604110</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">0x604110 &lt;n1&gt;:  0x0000000000000024      0x0000000000604130</span><br><span class="line">0x604120 &lt;n1+16&gt;:       0x0000000000604150      0x0000000000000000</span><br><span class="line">0x604130 &lt;n21&gt;: 0x0000000000000008      0x00000000006041b0</span><br><span class="line">0x604140 &lt;n21+16&gt;:      0x0000000000604170      0x0000000000000000</span><br><span class="line">0x604150 &lt;n22&gt;: 0x0000000000000032      0x0000000000604190</span><br><span class="line">0x604160 &lt;n22+16&gt;:      0x00000000006041d0      0x0000000000000000</span><br><span class="line">0x604170 &lt;n32&gt;: 0x0000000000000016      0x0000000000604290</span><br><span class="line">0x604180 &lt;n32+16&gt;:      0x0000000000604250      0x0000000000000000</span><br><span class="line">0x604190 &lt;n33&gt;: 0x000000000000002d      0x00000000006041f0</span><br><span class="line">0x6041a0 &lt;n33+16&gt;:      0x00000000006042b0      0x0000000000000000</span><br><span class="line">0x6041b0 &lt;n31&gt;: 0x0000000000000006      0x0000000000604210</span><br><span class="line">0x6041c0 &lt;n31+16&gt;:      0x0000000000604270      0x0000000000000000</span><br><span class="line">0x6041d0 &lt;n34&gt;: 0x000000000000006b      0x0000000000604230</span><br><span class="line">0x6041e0 &lt;n34+16&gt;:      0x00000000006042d0      0x0000000000000000</span><br><span class="line">0x6041f0 &lt;n45&gt;: 0x0000000000000028      0x0000000000000000</span><br><span class="line">0x604200 &lt;n45+16&gt;:      0x0000000000000000      0x0000000000000000</span><br><span class="line">0x604210 &lt;n41&gt;: 0x0000000000000001      0x0000000000000000</span><br><span class="line">0x604220 &lt;n41+16&gt;:      0x0000000000000000      0x0000000000000000</span><br><span class="line">0x604230 &lt;n47&gt;: 0x0000000000000063      0x0000000000000000</span><br><span class="line">0x604240 &lt;n47+16&gt;:      0x0000000000000000      0x0000000000000000</span><br><span class="line">0x604250 &lt;n44&gt;: 0x0000000000000023      0x0000000000000000</span><br><span class="line">0x604260 &lt;n44+16&gt;:      0x0000000000000000      0x0000000000000000</span><br><span class="line">0x604270 &lt;n42&gt;: 0x0000000000000007      0x0000000000000000</span><br><span class="line">0x604280 &lt;n42+16&gt;:      0x0000000000000000      0x0000000000000000</span><br><span class="line">0x604290 &lt;n43&gt;: 0x0000000000000014      0x0000000000000000</span><br><span class="line">0x6042a0 &lt;n43+16&gt;:      0x0000000000000000      0x0000000000000000</span><br><span class="line">0x6042b0 &lt;n46&gt;: 0x000000000000002f      0x0000000000000000</span><br><span class="line">0x6042c0 &lt;n46+16&gt;:      0x0000000000000000      0x0000000000000000</span><br><span class="line">0x6042d0 &lt;n48&gt;: 0x00000000000003e9      0x0000000000000000</span><br></pre></td></tr></table></figure>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs dns"><span class="hljs-number">0x604110</span> &lt;n1&gt;:  <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000024</span>      <span class="hljs-number">0</span>x0000<span class="hljs-number">000000604130</span><br><span class="hljs-number">0x604120</span> &lt;n1+<span class="hljs-number">16</span>&gt;:       <span class="hljs-number">0</span>x0000<span class="hljs-number">000000604150</span>      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span><br><span class="hljs-number">0x604130</span> &lt;n21&gt;: <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000008</span>      <span class="hljs-number">0</span>x000000<span class="hljs-number">00006041b0</span><br><span class="hljs-number">0x604140</span> &lt;n21+<span class="hljs-number">16</span>&gt;:      <span class="hljs-number">0</span>x0000<span class="hljs-number">000000604170</span>      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span><br><span class="hljs-number">0x604150</span> &lt;n22&gt;: <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000032</span>      <span class="hljs-number">0</span>x0000<span class="hljs-number">000000604190</span><br><span class="hljs-number">0x604160</span> &lt;n22+<span class="hljs-number">16</span>&gt;:      <span class="hljs-number">0</span>x000000<span class="hljs-number">00006041d0</span>      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span><br><span class="hljs-number">0x604170</span> &lt;n32&gt;: <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000016</span>      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000604290</span><br><span class="hljs-number">0x604180</span> &lt;n32+<span class="hljs-number">16</span>&gt;:      <span class="hljs-number">0</span>x0000<span class="hljs-number">000000604250</span>      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span><br><span class="hljs-number">0x604190</span> &lt;n33&gt;: <span class="hljs-number">0</span>x000000000000002d      <span class="hljs-number">0</span>x000000<span class="hljs-number">00006041f0</span><br><span class="hljs-number">0x6041a0</span> &lt;n33+<span class="hljs-number">16</span>&gt;:      <span class="hljs-number">0</span>x000000<span class="hljs-number">00006042b0</span>      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span><br><span class="hljs-number">0x6041b0</span> &lt;n31&gt;: <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000006</span>      <span class="hljs-number">0</span>x0000<span class="hljs-number">000000604210</span><br><span class="hljs-number">0x6041c0</span> &lt;n31+<span class="hljs-number">16</span>&gt;:      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000604270</span>      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span><br><span class="hljs-number">0x6041d0</span> &lt;n34&gt;: <span class="hljs-number">0</span>x000000000000006b      <span class="hljs-number">0</span>x0000<span class="hljs-number">000000604230</span><br><span class="hljs-number">0x6041e0</span> &lt;n34+<span class="hljs-number">16</span>&gt;:      <span class="hljs-number">0</span>x000000<span class="hljs-number">00006042d0</span>      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span><br><span class="hljs-number">0x6041f0</span> &lt;n45&gt;: <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000028</span>      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span><br><span class="hljs-number">0x604200</span> &lt;n45+<span class="hljs-number">16</span>&gt;:      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span>      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span><br><span class="hljs-number">0x604210</span> &lt;n41&gt;: <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000001</span>      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span><br><span class="hljs-number">0x604220</span> &lt;n41+<span class="hljs-number">16</span>&gt;:      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span>      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span><br><span class="hljs-number">0x604230</span> &lt;n47&gt;: <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000063</span>      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span><br><span class="hljs-number">0x604240</span> &lt;n47+<span class="hljs-number">16</span>&gt;:      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span>      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span><br><span class="hljs-number">0x604250</span> &lt;n44&gt;: <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000023</span>      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span><br><span class="hljs-number">0x604260</span> &lt;n44+<span class="hljs-number">16</span>&gt;:      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span>      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span><br><span class="hljs-number">0x604270</span> &lt;n42&gt;: <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000007</span>      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span><br><span class="hljs-number">0x604280</span> &lt;n42+<span class="hljs-number">16</span>&gt;:      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span>      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span><br><span class="hljs-number">0x604290</span> &lt;n43&gt;: <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000014</span>      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span><br><span class="hljs-number">0x6042a0</span> &lt;n43+<span class="hljs-number">16</span>&gt;:      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span>      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span><br><span class="hljs-number">0x6042b0</span> &lt;n46&gt;: <span class="hljs-number">0</span>x000000000000002f      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span><br><span class="hljs-number">0x6042c0</span> &lt;n46+<span class="hljs-number">16</span>&gt;:      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span>      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span><br><span class="hljs-number">0x6042d0</span> &lt;n48&gt;: <span class="hljs-number">0</span>x000000<span class="hljs-number">00000003e9</span>      <span class="hljs-number">0</span>x00000<span class="hljs-number">00000000000</span><br></code></pre></td></tr></table></figure>
 
 
 <p>二叉搜索树</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Tree</span>&#123;</span></span><br><span class="line">    <span class="type">int</span> val;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Tree</span>* <span class="title">left</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Tree</span>* <span class="title">right</span>;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/.io//12/18/Bomb-Lab/Tree.png" alt="二叉树"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Tree</span>&#123;</span><br>    <span class="hljs-type">int</span> val;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Tree</span>* <span class="hljs-title">left</span>;</span><br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Tree</span>* <span class="hljs-title">right</span>;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="/images/Tree.png" srcset="/img/loading.gif" lazyload alt="二叉树"></p>
 <p>返回值为5：右 左 右 0<br>47</p>
 
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Bomb Lab</div>
+      <div>https://sydcs.github.io/2023/12/18/Bomb-Lab/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Ye</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>December 18, 2023</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
   </div>
-</article>
 
 
 
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/08/17/Linear-Algebra/" title="Linear Algebra">
+                        <span class="hidden-mobile">Linear Algebra</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
 
-    <div id="nav-footer" style="display: none">
-      <ul>
-        
-          <li><a href="/">Home</a></li>
-        
-          <li><a href="/about/">About</a></li>
-        
-          <li><a href="/archives/">Writing</a></li>
-        
-          <li><a target="_blank" rel="noopener" href="https://github.com/SydCS">Projects</a></li>
-        
-      </ul>
-    </div>
-
-    
-    
-      <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#gdb-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">gdb 基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%AF%94%E8%BE%83"><span class="toc-number">2.</span> <span class="toc-text">1 字符串比较</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%BE%AA%E7%8E%AF"><span class="toc-number">3.</span> <span class="toc-text">2 循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%9D%A1%E4%BB%B6-%E5%88%86%E6%94%AF"><span class="toc-number">4.</span> <span class="toc-text">3 条件&#x2F;分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E9%80%92%E5%BD%92%E8%B0%83%E7%94%A8%E5%92%8C%E6%A0%88"><span class="toc-number">5.</span> <span class="toc-text">4 递归调用和栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%8C%87%E9%92%88"><span class="toc-number">6.</span> <span class="toc-text">5 指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E9%93%BE%E8%A1%A8-%E6%8C%87%E9%92%88-%E7%BB%93%E6%9E%84"><span class="toc-number">7.</span> <span class="toc-text">6 链表&#x2F;指针&#x2F;结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#secret-phase"><span class="toc-number">8.</span> <span class="toc-text">secret phase</span></a></li></ol>
+            
+          </article>
+        </div>
       </div>
-    
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://sydcs.github.io/2023/12/18/Bomb-Lab/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://sydcs.github.io/2023/12/18/Bomb-Lab/&text=Bomb Lab"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://sydcs.github.io/2023/12/18/Bomb-Lab/&title=Bomb Lab"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://sydcs.github.io/2023/12/18/Bomb-Lab/&is_video=false&description=Bomb Lab"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Bomb Lab&body=Check out this article: https://sydcs.github.io/2023/12/18/Bomb-Lab/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://sydcs.github.io/2023/12/18/Bomb-Lab/&title=Bomb Lab"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://sydcs.github.io/2023/12/18/Bomb-Lab/&title=Bomb Lab"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://sydcs.github.io/2023/12/18/Bomb-Lab/&title=Bomb Lab"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://sydcs.github.io/2023/12/18/Bomb-Lab/&title=Bomb Lab"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://sydcs.github.io/2023/12/18/Bomb-Lab/&name=Bomb Lab&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://sydcs.github.io/2023/12/18/Bomb-Lab/&t=Bomb Lab"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
     </div>
 
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
-        
-          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
-    </div>
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
+
+
+  </aside>
+
+
+    </div>
   </div>
 </div>
 
-        
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
-    
-    
-    2021-2023
-    Ye
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        <!--
-       --><li><a href="/">Home</a></li><!--
-     --><!--
-       --><li><a href="/about/">About</a></li><!--
-     --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="https://github.com/SydCS">Projects</a></li><!--
-     -->
-      </ul>
-    </nav>
-  </div>
-</footer>
 
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
     </div>
-    <!-- styles -->
+  </div>
+</div>
 
+    
 
+    
+  </main>
 
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
-
-
-
-
-<!-- clipboard -->
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
 
   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
   
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
-    btn += '<i class="fa-regular fa-clone"></i>';
-    btn += '</span>';
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
-      }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "Copied!");
-      e.clearSelection();
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
     })
-  })
   </script>
 
 
-<script src="/js/main.js"></script>
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
-<!-- search -->
 
-<!-- Baidu Analytics -->
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
 
-<!-- Cloudflare Analytics -->
 
-<!-- Disqus Comments -->
 
-<!-- utterances Comments -->
 
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
 </body>
 </html>
