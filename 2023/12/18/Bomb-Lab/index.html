@@ -16,18 +16,19 @@
   <meta name="author" content="Ye">
   <meta name="keywords" content="">
   
-    <meta name="description" content="gdb 基本使用disassemble … break … nextistepi continue x &#x2F;FMT ADDRESSprint EXP run ARGS 1 字符串比较layout asm disassemble phase_1 调 strings_not_equal要求返回0 - equal x &#x2F;s 0x4024c0“I am not part of the p">
+    <meta name="description" content="gdb 基本使用参考书 p194 disassemble … break … nextistepi continue x &#x2F;FMT ADDRESSprint EXP run ARGS 1 字符串比较layout asm disas phase_1 调用 strings_not_equal要求返回0 - equal x &#x2F;s 0x4024c0“I am not part of t">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Bomb Lab">
 <meta property="og:url" content="https://sydcs.github.io/2023/12/18/Bomb-Lab/index.html">
 <meta property="og:site_name" content="Ye&#39;s Blog">
-<meta property="og:description" content="gdb 基本使用disassemble … break … nextistepi continue x &#x2F;FMT ADDRESSprint EXP run ARGS 1 字符串比较layout asm disassemble phase_1 调 strings_not_equal要求返回0 - equal x &#x2F;s 0x4024c0“I am not part of the p">
+<meta property="og:description" content="gdb 基本使用参考书 p194 disassemble … break … nextistepi continue x &#x2F;FMT ADDRESSprint EXP run ARGS 1 字符串比较layout asm disas phase_1 调用 strings_not_equal要求返回0 - equal x &#x2F;s 0x4024c0“I am not part of t">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://sydcs.github.io/images/1.png">
 <meta property="og:image" content="https://sydcs.github.io/images/Tree.png">
 <meta property="article:published_time" content="2023-12-18T09:43:10.000Z">
-<meta property="article:modified_time" content="2023-12-18T11:37:38.780Z">
+<meta property="article:modified_time" content="2023-12-19T12:31:36.387Z">
 <meta property="article:author" content="Ye">
+<meta property="article:tag" content="CSAPP">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://sydcs.github.io/images/1.png">
   
@@ -73,7 +74,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"sydcs.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"sydcs.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -86,7 +87,7 @@
 
 
   
-<meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 7.0.0"></head>
 
 
 <body>
@@ -99,7 +100,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
+      <strong>Ye</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -224,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          707 words
+          723 words
         
       </span>
     
@@ -235,7 +236,7 @@
         
         
         
-          6 mins
+          7 mins
         
       </span>
     
@@ -277,22 +278,23 @@
             
               <div class="markdown-body">
                 
-                <h1 id="gdb-基本使用"><a href="#gdb-基本使用" class="headerlink" title="gdb 基本使用"></a>gdb 基本使用</h1><p>disassemble …</p>
+                <h1 id="gdb-基本使用"><a href="#gdb-基本使用" class="headerlink" title="gdb 基本使用"></a>gdb 基本使用</h1><p>参考书 p194</p>
+<p>disassemble …</p>
 <p>break …</p>
 <p>nexti<br>stepi</p>
 <p>continue</p>
 <p>x &#x2F;FMT ADDRESS<br>print EXP</p>
 <p>run ARGS</p>
 <h1 id="1-字符串比较"><a href="#1-字符串比较" class="headerlink" title="1 字符串比较"></a>1 字符串比较</h1><p>layout asm</p>
-<p>disassemble phase_1</p>
-<p>调 strings_not_equal<br>要求返回0 - equal</p>
-<p>x &#x2F;s 0x4024c0<br>“I am not part of the problem. I am a Republican.”<br>写入 ans.txt</p>
+<p>disas phase_1</p>
+<p>调用 strings_not_equal<br>要求返回0 - equal</p>
+<p>x &#x2F;s 0x4024c0<br>“I am not part of the problem. I am a Republican.”<br>将其写入 ans.txt</p>
 <p>break phase_1<br>run ans.txt<br>nexti<br>print $eax</p>
 <h1 id="2-循环"><a href="#2-循环" class="headerlink" title="2 循环"></a>2 循环</h1><p>disas phase_2</p>
-<p>调 read_six_numbers：</p>
+<p>调用 read_six_numbers：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">mov    $<span class="hljs-number">0x4027b5</span>,%esi     <br></code></pre></td></tr></table></figure>
 <p>x &#x2F;s 0x4027b5<br>“%d %d %d %d %d %d”</p>
-<p>调 sscanf：</p>
+<p>调用 sscanf：</p>
 <table>
 <thead>
 <tr>
@@ -319,7 +321,7 @@
 </tbody></table>
 <p>循环：第一个数为1，后面依次翻倍<br>1 2 4 8 16 32</p>
 <h1 id="3-条件-分支"><a href="#3-条件-分支" class="headerlink" title="3 条件&#x2F;分支"></a>3 条件&#x2F;分支</h1><p>disas phase_3</p>
-<p>调 sscanf：</p>
+<p>调用 sscanf：</p>
 <table>
 <thead>
 <tr>
@@ -343,7 +345,7 @@
 <p>不妨令第一个数 &#x3D; 1<br>x &#x2F;x 0x402528<br>0x00400fc9</p>
 <p>第二个数 0x52</p>
 <h1 id="4-递归调用和栈"><a href="#4-递归调用和栈" class="headerlink" title="4 递归调用和栈"></a>4 递归调用和栈</h1><p>disas phase_4</p>
-<p>同3，调 sscanf：</p>
+<p>同3，调用 sscanf：</p>
 <table>
 <thead>
 <tr>
@@ -363,7 +365,7 @@
 <p>x &#x2F;s 0x4027c1<br>“%d %d”</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c">cmpl   $<span class="hljs-number">0xe</span>,<span class="hljs-number">0xc</span>(%rsp)<br>jbe<br></code></pre></td></tr></table></figure>
 <p>第一个数 &lt;&#x3D; 14</p>
-<p>调 func4：</p>
+<p>调用 func4：</p>
 <table>
 <thead>
 <tr>
@@ -385,7 +387,7 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">cmpl   $<span class="hljs-number">0xf</span>,<span class="hljs-number">0x8</span>(%rsp)   <br></code></pre></td></tr></table></figure>
 <p>第二个数 &#x3D; f</p>
 <h1 id="5-指针"><a href="#5-指针" class="headerlink" title="5 指针"></a>5 指针</h1><p>disas phase_5</p>
-<p>调 string_length</p>
+<p>调用 string_length</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c">cmp    $<span class="hljs-number">0x6</span>,%eax <br>je<br></code></pre></td></tr></table></figure>
 <p>要求字符串长度为6</p>
 <p>进入循环：<br>循环6次，结果 %edx&#x3D;0x37</p>
@@ -393,7 +395,7 @@
 <p>x &#x2F;6x 0x402560<br>2 a 6 1 c 10</p>
 <p>16+12+10+10+6+1&#x3D;55<br>ASCII 码末四位作为索引 5 4 1 1 2 3<br>edaabc</p>
 <h1 id="6-链表-指针-结构"><a href="#6-链表-指针-结构" class="headerlink" title="6 链表&#x2F;指针&#x2F;结构"></a>6 链表&#x2F;指针&#x2F;结构</h1><p>disas phase_6</p>
-<p>调 read_six_numbers<br>放到从 %rsp+0x30 开始处</p>
+<p>调用 read_six_numbers<br>放到从 %rsp+0x30 开始处</p>
 <p>大循环1：<br>六个数都不同，并且均 &lt;&#x3D; 6</p>
 <p>循环2：<br>x &#x2F;24 0x6042f0</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">0x6042f0</span> &lt;node1&gt;:       <span class="hljs-number">0</span>x00000271      <span class="hljs-number">0</span>x00000001      <span class="hljs-number">0</span>x00604300      <span class="hljs-number">0</span>x00000000<br><span class="hljs-attribute">0x604300</span> &lt;node2&gt;:       <span class="hljs-number">0</span>x000002f2      <span class="hljs-number">0</span>x00000002      <span class="hljs-number">0</span>x00604310      <span class="hljs-number">0</span>x00000000<br><span class="hljs-attribute">0x604310</span> &lt;node3&gt;:       <span class="hljs-number">0</span>x00000111      <span class="hljs-number">0</span>x00000003      <span class="hljs-number">0</span>x00604320      <span class="hljs-number">0</span>x00000000<br><span class="hljs-attribute">0x604320</span> &lt;node4&gt;:       <span class="hljs-number">0</span>x00000231      <span class="hljs-number">0</span>x00000004      <span class="hljs-number">0</span>x00604330      <span class="hljs-number">0</span>x00000000<br><span class="hljs-attribute">0x604330</span> &lt;node5&gt;:       <span class="hljs-number">0</span>x0000016e      <span class="hljs-number">0</span>x00000005      <span class="hljs-number">0</span>x00604340      <span class="hljs-number">0</span>x00000000<br><span class="hljs-attribute">0x604340</span> &lt;node6&gt;:       <span class="hljs-number">0</span>x0000022f      <span class="hljs-number">0</span>x00000006      <span class="hljs-number">0</span>x00000000      <span class="hljs-number">0</span>x00000000<br><br><span class="hljs-attribute">0x6042f0</span> &lt;node1&gt;:       <span class="hljs-number">625</span>     <span class="hljs-number">1</span>       <span class="hljs-number">6308608</span> <span class="hljs-number">0</span><br><span class="hljs-attribute">0x604300</span> &lt;node2&gt;:       <span class="hljs-number">754</span>     <span class="hljs-number">2</span>       <span class="hljs-number">6308624</span> <span class="hljs-number">0</span><br><span class="hljs-attribute">0x604310</span> &lt;node3&gt;:       <span class="hljs-number">273</span>     <span class="hljs-number">3</span>       <span class="hljs-number">6308640</span> <span class="hljs-number">0</span><br><span class="hljs-attribute">0x604320</span> &lt;node4&gt;:       <span class="hljs-number">561</span>     <span class="hljs-number">4</span>       <span class="hljs-number">6308656</span> <span class="hljs-number">0</span><br><span class="hljs-attribute">0x604330</span> &lt;node5&gt;:       <span class="hljs-number">366</span>     <span class="hljs-number">5</span>       <span class="hljs-number">6308672</span> <span class="hljs-number">0</span><br><span class="hljs-attribute">0x604340</span> &lt;node6&gt;:       <span class="hljs-number">559</span>     <span class="hljs-number">6</span>       <span class="hljs-number">0</span>       <span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
@@ -416,8 +418,8 @@
 <p>综上，在 phase_4 的输入之后再补一个 DrEvil</p>
 <hr>
 <p>secret_phase：</p>
-<p>调 read_line，读入一个字符串<br>调 strtol，解析为十进制 num<br>num - 1 &lt;&#x3D; 1000</p>
-<p>调 fun7：</p>
+<p>调用 read_line，读入一个字符串<br>调用 strtol，解析为十进制 num<br>num - 1 &lt;&#x3D; 1000</p>
+<p>调用 fun7：</p>
 <table>
 <thead>
 <tr>
@@ -449,6 +451,13 @@
             <div>
               <div class="post-metas my-3">
   
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/CSAPP/" class="print-no-link">#CSAPP</a>
+      
+    </div>
   
 </div>
 
@@ -502,6 +511,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2023/12/18/Attack-Lab/" title="Attack Lab">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Attack Lab</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
