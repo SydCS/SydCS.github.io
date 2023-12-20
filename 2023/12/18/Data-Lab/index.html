@@ -16,15 +16,15 @@
   <meta name="author" content="Ye">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Basics矩阵表示线性映射。  线性方程组 Ax &#x3D; b 对任意向量 $\vec{b}$：  有唯一解：矩阵 A 可逆 (invertible)，$x &#x3D; A^{-1} \vec{b}$ 无解：   矩阵 $A$ &#x3D; ($\vec{u}$, $\vec{v}$, $\vec{w}$) 若 $A$ 可逆，则   $\vec{u}$, $\vec{v}$, $\vec{w}$ 的">
+    <meta name="description" content="bitXor(x, y)描述：只用 ~ 和 &amp; 实现 ~(x|y)思路：由反演定理，直接得出 ~(x|y) &#x3D; ~x &amp; ~y  copyLSB(x)描述：将 x 的所有位都设置为它的最低位的值思路：利用移位的性质，先将 x 的最低位左移到最高位，再算术右移回来。这样，如果该位是0就全为0，如果是1就全补1。  isEqual(x, y)描述：x&#x3D;&#x3D;y 返回1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linear Algebra">
-<meta property="og:url" content="https://sydcs.github.io/2023/08/17/Linear-Algebra/index.html">
+<meta property="og:title" content="Data Lab">
+<meta property="og:url" content="https://sydcs.github.io/2023/12/18/Data-Lab/index.html">
 <meta property="og:site_name" content="Ye&#39;s Blog">
-<meta property="og:description" content="Basics矩阵表示线性映射。  线性方程组 Ax &#x3D; b 对任意向量 $\vec{b}$：  有唯一解：矩阵 A 可逆 (invertible)，$x &#x3D; A^{-1} \vec{b}$ 无解：   矩阵 $A$ &#x3D; ($\vec{u}$, $\vec{v}$, $\vec{w}$) 若 $A$ 可逆，则   $\vec{u}$, $\vec{v}$, $\vec{w}$ 的">
+<meta property="og:description" content="bitXor(x, y)描述：只用 ~ 和 &amp; 实现 ~(x|y)思路：由反演定理，直接得出 ~(x|y) &#x3D; ~x &amp; ~y  copyLSB(x)描述：将 x 的所有位都设置为它的最低位的值思路：利用移位的性质，先将 x 的最低位左移到最高位，再算术右移回来。这样，如果该位是0就全为0，如果是1就全补1。  isEqual(x, y)描述：x&#x3D;&#x3D;y 返回1">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-08-16T16:30:01.000Z">
-<meta property="article:modified_time" content="2023-12-20T04:43:42.670Z">
+<meta property="article:published_time" content="2023-12-18T04:37:05.000Z">
+<meta property="article:modified_time" content="2023-12-20T04:44:49.753Z">
 <meta property="article:author" content="Ye">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Linear Algebra - Ye&#39;s Blog</title>
+  <title>Data Lab - Ye&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Linear Algebra"></span>
+            <span id="subtitle" data-typed-text="Data Lab"></span>
           
         </div>
 
@@ -209,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-08-17 00:30" pubdate>
-          August 17, 2023
+        <time datetime="2023-12-18 12:37" pubdate>
+          December 18, 2023
         </time>
       </span>
     
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          342 words
+          996 words
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          3 mins
+          9 mins
         
       </span>
     
@@ -262,6 +262,76 @@
   <div class="row nomargin-x">
     <div class="side-col d-none d-lg-block col-lg-2">
       
+  <aside class="sidebar category-bar" style="margin-right: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="CSAPP"
+        id="heading-2d4b54cf4106dd419d02fb0f312a0731" role="tab" data-toggle="collapse" href="#collapse-2d4b54cf4106dd419d02fb0f312a0731"
+        aria-expanded="true"
+      >
+        CSAPP
+        <span class="list-group-count">(3)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-2d4b54cf4106dd419d02fb0f312a0731"
+           role="tabpanel" aria-labelledby="heading-2d4b54cf4106dd419d02fb0f312a0731">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2023/12/18/Attack-Lab/" title="Attack Lab"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Attack Lab</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/12/18/Bomb-Lab/" title="Bomb Lab"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Bomb Lab</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/12/18/Data-Lab/" title="Data Lab"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">Data Lab</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
 
     </div>
 
@@ -269,7 +339,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Linear Algebra</h1>
+            <h1 id="seo-header">Data Lab</h1>
             
               <p id="updated-time" class="note note-default" style="">
                 
@@ -282,40 +352,74 @@
             
               <div class="markdown-body">
                 
-                <h2 id="Basics"><a href="#Basics" class="headerlink" title="Basics"></a>Basics</h2><p>矩阵表示线性映射。</p>
+                <ol>
+<li><p>bitXor(x, y)<br>描述：只用 ~ 和 &amp; 实现 ~(x|y)<br>思路：由反演定理，直接得出 ~(x|y) &#x3D; ~x &amp; ~y</p>
+</li>
+<li><p>copyLSB(x)<br>描述：将 x 的所有位都设置为它的最低位的值<br>思路：利用移位的性质，先将 x 的最低位左移到最高位，再算术右移回来。这样，如果该位是0就全为0，如果是1就全补1。</p>
+</li>
+<li><p>isEqual(x, y)<br>描述：x=&#x3D;y 返回1，否则返回0<br>思路：考虑 x=&#x3D;y，可以利用按位异或 ^ 的运算，x&#x3D;&#x3D;y 时结果为全0，否则有1。再跟一个逻辑非 ! 的操作，全0则返回1，否则返回0。</p>
+</li>
+<li><p>bitMask(highbit, lowbit)<br>描述：生成一个掩码，lowbit 位至 highbit 位均为1<br>思路：要产生这样一个 low 到 high 均为1，其余位为0的掩码，同样可以利用按位异或 ^ 运算。将一个全1的序列分别左移 low 和 high+1 位后再进行异或，就把中间不一致的那一段置为1，其余为0。此外，要考虑 lowbit &gt; highbit 的特殊情况，就再补上一个 &amp; low。</p>
+</li>
+<li><p>bitCount(int x)<br>描述：计算 x 中1的数目<br>思路 - baseline：采用分治的思想，制作出一个 mask，得出 x 的每字节中1的数目，然后将结果折叠到低8位中。</p>
+</li>
+<li><p>tmax()<br>描述：返回最大的补码<br>思路：最大的补码即0x7FFFFFFF,可以由0x80000000取反得到。</p>
+</li>
+<li><p>isNonNegative(x)<br>描述：如果x&gt;&#x3D;0，返回1，否则返回0<br>思路：x 是否非负要看符号位是否为1，首位右移31位再逻辑非 ! 即可。</p>
+</li>
+<li><p>addOK(x, y)<br>描述：确定 x+y 是否不溢出<br>思路：有符号数加法溢出的表现是：两数同号，而与其和异号。据此判断即可。</p>
+</li>
+<li><p>rempwr2(x, n)<br>描述：计算 x % (2^n)<br>思路 - baseline：要计算这个模，对于正数只需取出 x 的低 n 位。考虑负数的情况，可以通过取反加1将其转为正数，取出低 n 位，再取反加1转回负数。因为不能使用 if 语句，所以将这两种情况统一到绝对值的操作，见第11问。</p>
+</li>
+<li><p>isLess(x, y)<br>描述：如果 x&lt;y，返回1，否则返回0<br>思路：要判断两数大小，异号时直接得出结果，同号时可以借助 x-y 的符号判断。</p>
+</li>
+<li><p>absVal(x)<br>描述：x 的绝对值<br>思路：若是正数保持不变，若是负数取反加一。可以通过对 x &gt;&gt; 31 的运算统一这两种操作。</p>
+</li>
+<li><p>isPower2(x)<br>描述：如果 x 是2的幂，返回1，否则返回0<br>思路：即判断 x 除了为0的符号位外，是否仅由单独的一位1组成。在排除了 x&lt;0 和 x&#x3D;0 的情况后，对于正数 x，!(x &amp; (x + (~0))) 即可判断是否只有一个1。</p>
+</li>
+<li><p>float_neg(uf)<br>描述：计算 -f<br>思路：位级表示的浮点数，求负数直接符号位取反即可。此外，需要排除为 NAN 的情况，即判断阶码段 E 全1且尾数段 M 不为0。</p>
+</li>
+<li><p>float_half(uf)<br>描述：返回 0.5*f 的位级表示<br>思路：对于规格化的情况，除以二相当于在阶码段 E 减1。考虑为 inf 或 NAN 的情况，判断阶码段 E 为全1则直接返回；考虑结果为非规格化的情况，除以二相当于右移一位，还需要考虑浮点数向偶数舍入的要求，判断低二位为11时需要打个补丁让结果的最低位为0。</p>
+</li>
+<li><p>float_i2f(x)<br>描述：返回 (float)x 的位级表示<br>思路：如果 x 是 0 直接返回。对于非0的情况，通过看 x 除符号位外的第一个1在第几位，得到阶码段 E 的值。然后从 x 中摘出尾数段 M 的值。因为要舍去 x 的末9位，还要考虑舍入打个补丁。</p>
+</li>
+</ol>
 <hr>
-<p>线性方程组 <code>Ax = b</code> 对任意向量 $\vec{b}$：</p>
+<p>参考：</p>
 <ul>
-<li>有唯一解：矩阵 A 可逆 (invertible)，$x &#x3D; A^{-1} \vec{b}$</li>
-<li>无解：</li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/472188244">https://zhuanlan.zhihu.com/p/472188244</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/661117391">https://zhuanlan.zhihu.com/p/661117391</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/dopamine_joker/article/details/121029939">https://blog.csdn.net/dopamine_joker/article/details/121029939</a></li>
+<li><a target="_blank" rel="noopener" href="https://dovahyol.github.io/blog/2017/11/09/bit-count.html">https://dovahyol.github.io/blog/2017/11/09/bit-count.html</a></li>
 </ul>
-<hr>
-<p>矩阵 $A$ &#x3D; ($\vec{u}$, $\vec{v}$, $\vec{w}$)</p>
-<p>若 $A$ 可逆，则 </p>
-<ul>
-<li>$\vec{u}$, $\vec{v}$, $\vec{w}$ 的全部线性组合是整个3维空间。</li>
-<li>向量 $\vec{u}$, $\vec{v}$, $\vec{w}$ 线性无关 (linearly independent)。相应地，$Ax &#x3D; \vec{0}$ 只有零解。</li>
-</ul>
-<p>否则，$\vec{0}$ 可以写成 $\vec{u}$, $\vec{v}$, $\vec{w}$ 的多种线性组合。称矩阵 $A$ 奇异 (singular)，向量 $\vec{u}$, $\vec{v}$, $\vec{w}$ 线性相关。</p>
-<p>总结：<br>若方阵 $A$ 的列向量线性无关，则 $A$ 可逆，$Ax &#x3D; \vec{0}$ 只有零解；<br>若方阵 $A$ 的列向量线性相关，则 $A$ 奇异，$Ax &#x3D; \vec{0}$ 有无穷多解。</p>
-<hr>
-<p>秩 (rank)</p>
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3><p>正交矩阵 $AA^T &#x3D; I$</p>
-<h3 id="-1"><a href="#-1" class="headerlink" title=""></a></h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/45246414">15. MIT线性代数—投影 - 知乎</a></p>
-<h2 id="矩阵分解"><a href="#矩阵分解" class="headerlink" title="矩阵分解"></a>矩阵分解</h2><h3 id="特征分解"><a href="#特征分解" class="headerlink" title="特征分解"></a>特征分解</h3><p>$Av &#x3D; \lambda v$<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/649770264">证明：特征值之和等于迹，特征值之积等于行列式 - 知乎</a></p>
-<p>$A &#x3D; V diag(λ) V^{−1}$</p>
-<h3 id="SVD-分解"><a href="#SVD-分解" class="headerlink" title="SVD 分解"></a>SVD 分解</h3><p>$A &#x3D; U \Sigma V^\mathrm T$ </p>
-<h3 id="PCA"><a href="#PCA" class="headerlink" title="PCA"></a>PCA</h3><p><a target="_blank" rel="noopener" href="http://blog.codinglabs.org/articles/pca-tutorial.html">CodingLabs - PCA的数学原理</a></p>
-<p>[[概率论 revisted#统计量]]<br>协方差矩阵对角化</p>
-<p>$$ Y&#x3D;PX $$</p>
-<p>$$\begin{array}{l l l}<br>D &amp; &#x3D; &amp; \frac{1}{m}YY^\mathsf{T} \<br>&amp; &#x3D; &amp; \frac{1}{m}(PX)(PX)^\mathsf{T} \<br>&amp; &#x3D; &amp; \frac{1}{m}PXX^\mathsf{T}P^\mathsf{T} \<br>&amp; &#x3D; &amp; P(\frac{1}{m}XX^\mathsf{T})P^\mathsf{T} \<br>&amp; &#x3D; &amp; PCP^\mathsf{T}<br>\end{array}$$</p>
-<h2 id="二次型"><a href="#二次型" class="headerlink" title="二次型"></a>二次型</h2>
+
                 
               </div>
             
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/CSAPP/" class="category-chain-item">CSAPP</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -326,8 +430,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Linear Algebra</div>
-      <div>https://sydcs.github.io/2023/08/17/Linear-Algebra/</div>
+      <div>Data Lab</div>
+      <div>https://sydcs.github.io/2023/12/18/Data-Lab/</div>
     </div>
     <div class="license-meta">
       
@@ -339,7 +443,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>August 17, 2023</div>
+          <div>December 18, 2023</div>
         </div>
       
       
@@ -371,9 +475,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/12/18/Data-Lab/" title="Data Lab">
+                      <a href="/2023/12/18/Bomb-Lab/" title="Bomb Lab">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Data Lab</span>
+                        <span class="hidden-mobile">Bomb Lab</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -381,8 +485,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/08/14/screen/" title="screen">
-                        <span class="hidden-mobile">screen</span>
+                      <a href="/2023/08/17/Linear-Algebra/" title="Linear Algebra">
+                        <span class="hidden-mobile">Linear Algebra</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
