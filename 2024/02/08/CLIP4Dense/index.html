@@ -16,23 +16,35 @@
   <meta name="author" content="Ye">
   <meta name="keywords" content="">
   
-    <meta name="description" content="bitXor(x, y)描述：只用 ~ 和 &amp; 实现 ~(x|y)思路：由反演定理，直接得出 ~(x|y) &#x3D; ~x &amp; ~y  copyLSB(x)描述：将 x 的所有位都设置为它的最低位的值思路：利用移位的性质，先将 x 的最低位左移到最高位，再算术右移回来。这样，如果该位是 0 就全为 0，如果是 1 就全补 1。  isEqual(x, y)描述：x&#x3D;&amp;#x3D">
+    <meta name="description" content="#! https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;681837427 Extract Free Dense Labels from CLIP (MaskCLIP)(ECCV 2022 Oral)  以 patch 为单位与 text embeddings 点乘做分类 Perceptual Grouping in Contrastive Vision-Language Models (">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Data Lab">
-<meta property="og:url" content="https://sydcs.github.io/2023/12/18/Data-Lab/index.html">
+<meta property="og:title" content="CLIP for Dense Tasks">
+<meta property="og:url" content="https://sydcs.github.io/2024/02/08/CLIP4Dense/index.html">
 <meta property="og:site_name" content="Ye&#39;s Blog">
-<meta property="og:description" content="bitXor(x, y)描述：只用 ~ 和 &amp; 实现 ~(x|y)思路：由反演定理，直接得出 ~(x|y) &#x3D; ~x &amp; ~y  copyLSB(x)描述：将 x 的所有位都设置为它的最低位的值思路：利用移位的性质，先将 x 的最低位左移到最高位，再算术右移回来。这样，如果该位是 0 就全为 0，如果是 1 就全补 1。  isEqual(x, y)描述：x&#x3D;&amp;#x3D">
+<meta property="og:description" content="#! https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;681837427 Extract Free Dense Labels from CLIP (MaskCLIP)(ECCV 2022 Oral)  以 patch 为单位与 text embeddings 点乘做分类 Perceptual Grouping in Contrastive Vision-Language Models (">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-12-18T04:37:05.000Z">
-<meta property="article:modified_time" content="2024-02-07T17:06:07.344Z">
+<meta property="og:image" content="https://sydcs.github.io/image-2.png">
+<meta property="og:image" content="https://sydcs.github.io/image-9.png">
+<meta property="og:image" content="https://sydcs.github.io/image-7.png">
+<meta property="og:image" content="https://sydcs.github.io/image.png">
+<meta property="og:image" content="https://sydcs.github.io/image-6.png">
+<meta property="og:image" content="https://sydcs.github.io/image-8.png">
+<meta property="og:image" content="https://sydcs.github.io/image-10.png">
+<meta property="og:image" content="https://sydcs.github.io/image-11.png">
+<meta property="og:image" content="https://sydcs.github.io/image-3.png">
+<meta property="og:image" content="https://sydcs.github.io/image-4.png">
+<meta property="og:image" content="https://sydcs.github.io/image-5.png">
+<meta property="article:published_time" content="2024-02-07T17:16:31.000Z">
+<meta property="article:modified_time" content="2024-02-07T17:18:35.902Z">
 <meta property="article:author" content="Ye">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sydcs.github.io/image-2.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Data Lab - Ye&#39;s Blog</title>
+  <title>CLIP for Dense Tasks - Ye&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +210,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Data Lab"></span>
+            <span id="subtitle" data-typed-text="CLIP for Dense Tasks"></span>
           
         </div>
 
@@ -209,8 +221,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-12-18 12:37" pubdate>
-          December 18, 2023
+        <time datetime="2024-02-08 01:16" pubdate>
+          February 8, 2024
         </time>
       </span>
     
@@ -221,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          996 words
+          236 words
         
       </span>
     
@@ -232,7 +244,7 @@
         
         
         
-          9 mins
+          2 mins
         
       </span>
     
@@ -262,76 +274,6 @@
   <div class="row nomargin-x">
     <div class="side-col d-none d-lg-block col-lg-2">
       
-  <aside class="sidebar category-bar" style="margin-right: -1rem">
-    
-
-
-
-
-
-<div class="category-list">
-  
-  
-    
-    
-    
-    <div class="category row nomargin-x">
-      <a class="category-item 
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="CSAPP"
-        id="heading-2d4b54cf4106dd419d02fb0f312a0731" role="tab" data-toggle="collapse" href="#collapse-2d4b54cf4106dd419d02fb0f312a0731"
-        aria-expanded="true"
-      >
-        CSAPP
-        <span class="list-group-count">(3)</span>
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      
-      <div class="category-collapse collapse show" id="collapse-2d4b54cf4106dd419d02fb0f312a0731"
-           role="tabpanel" aria-labelledby="heading-2d4b54cf4106dd419d02fb0f312a0731">
-        
-        
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/2023/12/18/Attack-Lab/" title="Attack Lab"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Attack Lab</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/12/18/Bomb-Lab/" title="Bomb Lab"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Bomb Lab</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/12/18/Data-Lab/" title="Data Lab"
-           class="list-group-item list-group-item-action
-           active">
-          <span class="category-post">Data Lab</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-</div>
-
-
-  </aside>
-
 
     </div>
 
@@ -339,7 +281,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Data Lab</h1>
+            <h1 id="seo-header">CLIP for Dense Tasks</h1>
             
               <p id="updated-time" class="note note-default" style="">
                 
@@ -352,45 +294,65 @@
             
               <div class="markdown-body">
                 
-                <ol>
-<li><p>bitXor(x, y)<br>描述：只用 ~ 和 &amp; 实现 ~(x|y)<br>思路：由反演定理，直接得出 ~(x|y) &#x3D; ~x &amp; ~y</p>
+                <p>#! <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/681837427">https://zhuanlan.zhihu.com/p/681837427</a></p>
+<h1 id="Extract-Free-Dense-Labels-from-CLIP-MaskCLIP"><a href="#Extract-Free-Dense-Labels-from-CLIP-MaskCLIP" class="headerlink" title="Extract Free Dense Labels from CLIP (MaskCLIP)"></a>Extract Free Dense Labels from CLIP (MaskCLIP)</h1><p>(ECCV 2022 Oral)</p>
+<p><img src="/image-2.png" srcset="/img/loading.gif" lazyload></p>
+<p>以 patch 为单位与 text embeddings 点乘做分类</p>
+<h1 id="Perceptual-Grouping-in-Contrastive-Vision-Language-Models-CLIPpy"><a href="#Perceptual-Grouping-in-Contrastive-Vision-Language-Models-CLIPpy" class="headerlink" title="Perceptual Grouping in Contrastive Vision-Language Models (CLIPpy)"></a>Perceptual Grouping in Contrastive Vision-Language Models (CLIPpy)</h1><p>(ICCV 2023)</p>
+<p><img src="/image-9.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="Open-Vocabulary-Semantic-Segmentation-with-Patch-Aligned-Contrastive-Learning-PACL"><a href="#Open-Vocabulary-Semantic-Segmentation-with-Patch-Aligned-Contrastive-Learning-PACL" class="headerlink" title="Open Vocabulary Semantic Segmentation with Patch Aligned Contrastive Learning (PACL)"></a>Open Vocabulary Semantic Segmentation with Patch Aligned Contrastive Learning (PACL)</h1><p>(CVPR 2023 Highlight)</p>
+<p><img src="/image-7.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Observation"><a href="#Observation" class="headerlink" title="Observation"></a>Observation</h2><ul>
+<li>alignment between image and text <strong>at a patch level</strong> does not necessarily exist<br><img src="/image.png" srcset="/img/loading.gif" lazyload></li>
+<li>CLIP’s vision encoders outperform DINO on <strong>semantic coherence</strong> (semantically similar regions in images should produce similar patch representations in the vision encoder)<br><img src="/image-6.png" srcset="/img/loading.gif" lazyload></li>
+</ul>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p><img src="/image-8.png" srcset="/img/loading.gif" lazyload></p>
+<p>Patch Aligned Contrastive Learning: take a <em>weighted sum</em> over vision patch embeddings where the weights are obtained from the patch-level similarities with the text embedding.</p>
+<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><ul>
+<li><p>Only train the small vision embedder on 30M image-text datasets.</p>
 </li>
-<li><p>copyLSB(x)<br>描述：将 x 的所有位都设置为它的最低位的值<br>思路：利用移位的性质，先将 x 的最低位左移到最高位，再算术右移回来。这样，如果该位是 0 就全为 0，如果是 1 就全补 1。</p>
-</li>
-<li><p>isEqual(x, y)<br>描述：x=&#x3D;y 返回 1，否则返回 0<br>思路：考虑 x=&#x3D;y，可以利用按位异或 ^ 的运算，x&#x3D;&#x3D;y 时结果为全 0，否则有 1。再跟一个逻辑非 ! 的操作，全 0 则返回 1，否则返回 0。</p>
-</li>
-<li><p>bitMask(highbit, lowbit)<br>描述：生成一个掩码，lowbit 位至 highbit 位均为 1<br>思路：要产生这样一个 low 到 high 均为 1，其余位为 0 的掩码，同样可以利用按位异或 ^ 运算。将一个全 1 的序列分别左移 low 和 high+1 位后再进行异或，就把中间不一致的那一段置为 1，其余为 0。此外，要考虑 lowbit &gt; highbit 的特殊情况，就再补上一个 &amp; low。</p>
-</li>
-<li><p>bitCount(int x)<br>描述：计算 x 中 1 的数目<br>思路 - baseline：采用分治的思想，制作出一个 mask，得出 x 的每字节中 1 的数目，然后将结果折叠到低 8 位中。</p>
-</li>
-<li><p>tmax()<br>描述：返回最大的补码<br>思路：最大的补码即 0x7FFFFFFF,可以由 0x80000000 取反得到。</p>
-</li>
-<li><p>isNonNegative(x)<br>描述：如果 x&gt;&#x3D;0，返回 1，否则返回 0<br>思路：x 是否非负要看符号位是否为 1，首位右移 31 位再逻辑非 ! 即可。</p>
-</li>
-<li><p>addOK(x, y)<br>描述：确定 x+y 是否不溢出<br>思路：有符号数加法溢出的表现是：两数同号，而与其和异号。据此判断即可。</p>
-</li>
-<li><p>rempwr2(x, n)<br>描述：计算 x % (2^n)<br>思路 - baseline：要计算这个模，对于正数只需取出 x 的低 n 位。考虑负数的情况，可以通过取反加 1 将其转为正数，取出低 n 位，再取反加 1 转回负数。因为不能使用 if 语句，所以将这两种情况统一到绝对值的操作，见第 11 问。</p>
-</li>
-<li><p>isLess(x, y)<br>   描述：如果 x&lt;y，返回 1，否则返回 0<br>   思路：要判断两数大小，异号时直接得出结果，同号时可以借助 x-y 的符号判断。</p>
-</li>
-<li><p>absVal(x)<br>   描述：x 的绝对值<br>   思路：若是正数保持不变，若是负数取反加一。可以通过对 x &gt;&gt; 31 的运算统一这两种操作。</p>
-</li>
-<li><p>isPower2(x)<br>   描述：如果 x 是 2 的幂，返回 1，否则返回 0<br>   思路：即判断 x 除了为 0 的符号位外，是否仅由单独的一位 1 组成。在排除了 x&lt;0 和 x&#x3D;0 的情况后，对于正数 x，!(x &amp; (x + (~0))) 即可判断是否只有一个 1。</p>
-</li>
-<li><p>float_neg(uf)<br>   描述：计算 -f<br>   思路：位级表示的浮点数，求负数直接符号位取反即可。此外，需要排除为 NAN 的情况，即判断阶码段 E 全 1 且尾数段 M 不为 0。</p>
-</li>
-<li><p>float_half(uf)<br>   描述：返回 0.5*f 的位级表示<br>   思路：对于规格化的情况，除以二相当于在阶码段 E 减 1。考虑为 inf 或 NAN 的情况，判断阶码段 E 为全 1 则直接返回；考虑结果为非规格化的情况，除以二相当于右移一位，还需要考虑浮点数向偶数舍入的要求，判断低二位为 11 时需要打个补丁让结果的最低位为 0。</p>
-</li>
-<li><p>float_i2f(x)<br>   描述：返回 (float)x 的位级表示<br>   思路：如果 x 是 0 直接返回。对于非 0 的情况，通过看 x 除符号位外的第一个 1 在第几位，得到阶码段 E 的值。然后从 x 中摘出尾数段 M 的值。因为要舍去 x 的末 9 位，还要考虑舍入打个补丁。</p>
-</li>
-</ol>
-<hr>
-<p>参考：</p>
+<li><p>Zero-shot Semantic Segmentation:</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/472188244">https://zhuanlan.zhihu.com/p/472188244</a></li>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/661117391">https://zhuanlan.zhihu.com/p/661117391</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/dopamine_joker/article/details/121029939">https://blog.csdn.net/dopamine_joker/article/details/121029939</a></li>
-<li><a target="_blank" rel="noopener" href="https://dovahyol.github.io/blog/2017/11/09/bit-count.html">https://dovahyol.github.io/blog/2017/11/09/bit-count.html</a></li>
+<li>Stride trick at inference: a change to the stride of the convolutional layer to extract image patches in ViT can provide better fine-grained patches at inference time.<br><img src="/image-10.png" srcset="/img/loading.gif" lazyload></li>
+</ul>
+</li>
+<li><p>有趣的发现：</p>
+<ul>
+<li>CLIP B&#x2F;16 &gt; CLIP L&#x2F;14 &gt; DINO B&#x2F;16</li>
+<li>PACL 效果与模型的 semantic coherence 正相关</li>
+</ul>
+</li>
+</ul>
+<h1 id="SegCLIP-Patch-Aggregation-with-Learnable-Centers-for-Open-Vocabulary-Semantic-Segmentation"><a href="#SegCLIP-Patch-Aggregation-with-Learnable-Centers-for-Open-Vocabulary-Semantic-Segmentation" class="headerlink" title="SegCLIP: Patch Aggregation with Learnable Centers for Open-Vocabulary Semantic Segmentation"></a>SegCLIP: Patch Aggregation with Learnable Centers for Open-Vocabulary Semantic Segmentation</h1><p>(ICML 2023)</p>
+<p><img src="/image-11.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="CLIPSelf-Vision-Transformer-Distills-Itself-for-Open-Vocabulary-Dense-Prediction"><a href="#CLIPSelf-Vision-Transformer-Distills-Itself-for-Open-Vocabulary-Dense-Prediction" class="headerlink" title="CLIPSelf: Vision Transformer Distills Itself for Open-Vocabulary Dense Prediction"></a>CLIPSelf: Vision Transformer Distills Itself for Open-Vocabulary Dense Prediction</h1><p>(ICLR 2024 Spotlight)</p>
+<h2 id="Observation-1"><a href="#Observation-1" class="headerlink" title="Observation"></a>Observation</h2><p><img src="/image-3.png" srcset="/img/loading.gif" lazyload></p>
+<p>比较 CLIP Resnet&#x2F;ViT，Image Crop&#x2F;Dense Feature 的 classification accuracy，发现：</p>
+<ul>
+<li>对 whole image 和 cropped image 分类，ViT &gt; Resnet</li>
+<li>用 representations pooled from the feature map 分类，ViT 点掉了很多，Resnet 基本不受影响</li>
+</ul>
+<p>对 feature map 做 K-Means 聚类并可视化，表明 ViT 的比较杂乱。</p>
+<p>可能原因：</p>
+<ul>
+<li>ViT lacks local inductive bias, hindering the smooth transfer from representing pixels of a whole image to representing pixels of a local image region.</li>
+<li>each spot on the dense feature map of the CLIP ViT tends to encode the global image.</li>
+</ul>
+<p>通过 Retrieval experiment on images and regions 验证：the dense features are well matched with the corresponding images, indicating that each location on the dense feature map tends to encode a global image representation.</p>
+<h2 id="Method-1"><a href="#Method-1" class="headerlink" title="Method"></a>Method</h2><p><img src="/image-4.png" srcset="/img/loading.gif" lazyload></p>
+<p>方法很简单：既然 Image Crop 比 Dense Feature 分类效果好，那就用 the representations of image crops 蒸馏 the region representations pooled from the dense feature map！</p>
+<ul>
+<li>Image Patches as Regions: $m \times n$ patches.</li>
+<li>Self-Distillation: align the region representations pooled from dense feature maps to the image representations of the corresponding image crops.</li>
+</ul>
+<p>$$<br>\mathcal{L} &#x3D; \frac{1}{m \times n} \sum\limits_{i&#x3D;0}^{m-1} \sum\limits_{j&#x3D;0}^{n-1} \left(1-\frac{s_{\text {dense }}^{i j} \cdot t_{\text {image }}^{i j}}{\left|s_{\text {dense }}^{i j}\right| \cdot \left|t_{\text {image }}^{i j}\right|}\right)<br>$$</p>
+<h2 id="Experiments-1"><a href="#Experiments-1" class="headerlink" title="Experiments"></a>Experiments</h2><ul>
+<li><p>fine-tune CLIP on COCO</p>
+</li>
+<li><p>K-Means visualization:<br><img src="/image-5.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>Open-Vocabulary Dense Prediction: 用作 Open-Vocabulary Object Detection (F-VLM) &#x2F; Semantic Segmentation (Cat-Seg) &#x2F; Panoptic Segmentation (ODISE) 的 backbone，点数能涨不少。</p>
+</li>
 </ul>
 
                 
@@ -410,7 +372,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/CSAPP/" class="category-chain-item">CSAPP</a>
+  <a href="/categories/DL/" class="category-chain-item">DL</a>
   
   
 
@@ -430,8 +392,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Data Lab</div>
-      <div>https://sydcs.github.io/2023/12/18/Data-Lab/</div>
+      <div>CLIP for Dense Tasks</div>
+      <div>https://sydcs.github.io/2024/02/08/CLIP4Dense/</div>
     </div>
     <div class="license-meta">
       
@@ -443,7 +405,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>December 18, 2023</div>
+          <div>February 8, 2024</div>
         </div>
       
       
@@ -475,18 +437,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/12/18/Bomb-Lab/" title="Bomb Lab">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Bomb Lab</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/08/17/Linear-Algebra/" title="Linear Algebra">
-                        <span class="hidden-mobile">Linear Algebra</span>
+                      <a href="/2024/02/08/DINO/" title="Fantastic DINO and Why They Pick It">
+                        <span class="hidden-mobile">Fantastic DINO and Why They Pick It</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

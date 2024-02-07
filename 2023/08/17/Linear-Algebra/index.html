@@ -16,15 +16,15 @@
   <meta name="author" content="Ye">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Basics矩阵表示线性映射。  线性方程组 Ax &#x3D; b 对任意向量 $\vec{b}$：  有唯一解：矩阵 A 可逆 (invertible)，$x &#x3D; A^{-1} \vec{b}$ 无解：   矩阵 $A$ &#x3D; ($\vec{u}$, $\vec{v}$, $\vec{w}$) 若 $A$ 可逆，则   $\vec{u}$, $\vec{v}$, $\vec{w}$ 的">
+    <meta name="description" content="Basics矩阵表示线性映射。  线性方程组 Ax &#x3D; b 对任意向量 $\vec{b}$：  有唯一解：矩阵 A 可逆 (invertible)，$x &#x3D; A^{-1} \vec{b}$ 无解：   矩阵 $A$ &#x3D; ($\vec{u}$, $\vec{v}$, $\vec{w}$) 若 $A$ 可逆，则  $\vec{u}$, $\vec{v}$, $\vec{w}$ 的全">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linear Algebra">
 <meta property="og:url" content="https://sydcs.github.io/2023/08/17/Linear-Algebra/index.html">
 <meta property="og:site_name" content="Ye&#39;s Blog">
-<meta property="og:description" content="Basics矩阵表示线性映射。  线性方程组 Ax &#x3D; b 对任意向量 $\vec{b}$：  有唯一解：矩阵 A 可逆 (invertible)，$x &#x3D; A^{-1} \vec{b}$ 无解：   矩阵 $A$ &#x3D; ($\vec{u}$, $\vec{v}$, $\vec{w}$) 若 $A$ 可逆，则   $\vec{u}$, $\vec{v}$, $\vec{w}$ 的">
+<meta property="og:description" content="Basics矩阵表示线性映射。  线性方程组 Ax &#x3D; b 对任意向量 $\vec{b}$：  有唯一解：矩阵 A 可逆 (invertible)，$x &#x3D; A^{-1} \vec{b}$ 无解：   矩阵 $A$ &#x3D; ($\vec{u}$, $\vec{v}$, $\vec{w}$) 若 $A$ 可逆，则  $\vec{u}$, $\vec{v}$, $\vec{w}$ 的全">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-08-16T16:30:01.000Z">
-<meta property="article:modified_time" content="2023-12-20T04:43:42.670Z">
+<meta property="article:modified_time" content="2024-02-07T17:02:32.688Z">
 <meta property="article:author" content="Ye">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -274,7 +274,7 @@
               <p id="updated-time" class="note note-default" style="">
                 
                   
-                    Last updated on December 20, 2023
+                    Last updated on February 8, 2024
                   
                 
               </p>
@@ -291,9 +291,9 @@
 </ul>
 <hr>
 <p>矩阵 $A$ &#x3D; ($\vec{u}$, $\vec{v}$, $\vec{w}$)</p>
-<p>若 $A$ 可逆，则 </p>
+<p>若 $A$ 可逆，则</p>
 <ul>
-<li>$\vec{u}$, $\vec{v}$, $\vec{w}$ 的全部线性组合是整个3维空间。</li>
+<li>$\vec{u}$, $\vec{v}$, $\vec{w}$ 的全部线性组合是整个 3 维空间。</li>
 <li>向量 $\vec{u}$, $\vec{v}$, $\vec{w}$ 线性无关 (linearly independent)。相应地，$Ax &#x3D; \vec{0}$ 只有零解。</li>
 </ul>
 <p>否则，$\vec{0}$ 可以写成 $\vec{u}$, $\vec{v}$, $\vec{w}$ 的多种线性组合。称矩阵 $A$ 奇异 (singular)，向量 $\vec{u}$, $\vec{v}$, $\vec{w}$ 线性相关。</p>
@@ -301,14 +301,14 @@
 <hr>
 <p>秩 (rank)</p>
 <h3 id=""><a href="#" class="headerlink" title=""></a></h3><p>正交矩阵 $AA^T &#x3D; I$</p>
-<h3 id="-1"><a href="#-1" class="headerlink" title=""></a></h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/45246414">15. MIT线性代数—投影 - 知乎</a></p>
+<h3 id="-1"><a href="#-1" class="headerlink" title=""></a></h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/45246414">15. MIT 线性代数—投影 - 知乎</a></p>
 <h2 id="矩阵分解"><a href="#矩阵分解" class="headerlink" title="矩阵分解"></a>矩阵分解</h2><h3 id="特征分解"><a href="#特征分解" class="headerlink" title="特征分解"></a>特征分解</h3><p>$Av &#x3D; \lambda v$<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/649770264">证明：特征值之和等于迹，特征值之积等于行列式 - 知乎</a></p>
 <p>$A &#x3D; V diag(λ) V^{−1}$</p>
-<h3 id="SVD-分解"><a href="#SVD-分解" class="headerlink" title="SVD 分解"></a>SVD 分解</h3><p>$A &#x3D; U \Sigma V^\mathrm T$ </p>
-<h3 id="PCA"><a href="#PCA" class="headerlink" title="PCA"></a>PCA</h3><p><a target="_blank" rel="noopener" href="http://blog.codinglabs.org/articles/pca-tutorial.html">CodingLabs - PCA的数学原理</a></p>
+<h3 id="SVD-分解"><a href="#SVD-分解" class="headerlink" title="SVD 分解"></a>SVD 分解</h3><p>$A &#x3D; U \Sigma V^\mathrm T$</p>
+<h3 id="PCA"><a href="#PCA" class="headerlink" title="PCA"></a>PCA</h3><p><a target="_blank" rel="noopener" href="http://blog.codinglabs.org/articles/pca-tutorial.html">CodingLabs - PCA 的数学原理</a></p>
 <p>[[概率论 revisted#统计量]]<br>协方差矩阵对角化</p>
 <p>$$ Y&#x3D;PX $$</p>
-<p>$$\begin{array}{l l l}<br>D &amp; &#x3D; &amp; \frac{1}{m}YY^\mathsf{T} \<br>&amp; &#x3D; &amp; \frac{1}{m}(PX)(PX)^\mathsf{T} \<br>&amp; &#x3D; &amp; \frac{1}{m}PXX^\mathsf{T}P^\mathsf{T} \<br>&amp; &#x3D; &amp; P(\frac{1}{m}XX^\mathsf{T})P^\mathsf{T} \<br>&amp; &#x3D; &amp; PCP^\mathsf{T}<br>\end{array}$$</p>
+<p>$$<br>\begin{array}{l l l}<br>D &amp; &#x3D; &amp; \frac{1}{m}YY^\mathsf{T} \<br>&amp; &#x3D; &amp; \frac{1}{m}(PX)(PX)^\mathsf{T} \<br>&amp; &#x3D; &amp; \frac{1}{m}PXX^\mathsf{T}P^\mathsf{T} \<br>&amp; &#x3D; &amp; P(\frac{1}{m}XX^\mathsf{T})P^\mathsf{T} \<br>&amp; &#x3D; &amp; PCP^\mathsf{T}<br>\end{array}<br>$$</p>
 <h2 id="二次型"><a href="#二次型" class="headerlink" title="二次型"></a>二次型</h2>
                 
               </div>
